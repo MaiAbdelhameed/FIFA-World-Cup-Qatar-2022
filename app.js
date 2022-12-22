@@ -9,11 +9,12 @@ const bcrypt = require('bcrypt')
 const passport = require('passport');
 
 
+const port = process.env.PORT || 3000;
 //connect to mongodb
 const db='mongodb+srv://mai101:123hobba@cluster0.mldedku.mongodb.net/FIFA?retryWrites=true&w=majority';
 mongoose.set('strictQuery', true);
 mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
-.then((result)=> app.listen(3000))
+.then((result)=> app.listen(port))
 .catch((err)=>console.log('DB connection error',err));
 
 app.set('view engine','ejs');
