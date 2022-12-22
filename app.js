@@ -8,6 +8,7 @@ const app= express();
 const bcrypt = require('bcrypt')
 const passport = require('passport');
 
+
 //connect to mongodb
 const db='mongodb+srv://mai101:123hobba@cluster0.mldedku.mongodb.net/FIFA?retryWrites=true&w=majority';
 mongoose.set('strictQuery', true);
