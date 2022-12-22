@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt')
 const passport = require('passport');
 
 
-const port = process.env.PORT || 3000;
+const port = 10000;
 app.listen(port, () => {
     console.log(`server started on port ${port}`);
   });
@@ -46,7 +46,7 @@ app.get('http://fifaqatarworldcup.com/', (req, res)=> {
 
 
 //user routes
-app.get('/add-user', (req, res)=>{
+app.get('http://fifaqatarworldcup.com/add-user', (req, res)=>{
     const user0= new Users({
         username: 'maiii',
         pass: '1234',
@@ -77,7 +77,7 @@ app.get('http://fifaqatarworldcup.com/all-users', (req, res)=> {
 });
 
 
-app.get('/single-user', (req, res)=> {
+app.get('http://fifaqatarworldcup.com/single-user', (req, res)=> {
     Users.findById()
     .then((result)=>{
         res.send(result)
@@ -226,7 +226,7 @@ app.get('http://fifaqatarworldcup.com/all-matches', (req, res)=> {
 });
 
 
-app.get('/single-match', (req, res)=> {
+app.get('http://fifaqatarworldcup.com/single-match', (req, res)=> {
     Match.findById('')
     .then((result)=>{
         res.send(result)
@@ -237,7 +237,7 @@ app.get('/single-match', (req, res)=> {
 });
 
 
-app.delete('/single-match/:id', (req,res)=>{
+app.delete('http://fifaqatarworldcup.com/single-match/:id', (req,res)=>{
     const id = req.params.id;
 
     Match.findByIdAndDelete(id)
