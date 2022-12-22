@@ -10,9 +10,6 @@ const passport = require('passport');
 
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-    console.log(`server started on port ${port}`);
-  });
 //connect to mongodb
 const db='mongodb+srv://mai101:123hobba@cluster0.mldedku.mongodb.net/FIFA?retryWrites=true&w=majority';
 mongoose.set('strictQuery', true);
