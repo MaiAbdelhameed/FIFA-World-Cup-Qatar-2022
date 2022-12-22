@@ -10,6 +10,9 @@ const passport = require('passport');
 
 
 const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`server started on port ${port}`);
+  });
 //connect to mongodb
 const db='mongodb+srv://mai101:123hobba@cluster0.mldedku.mongodb.net/FIFA?retryWrites=true&w=majority';
 mongoose.set('strictQuery', true);
@@ -29,11 +32,11 @@ app.use(bp.urlencoded({ extended: true }))
 app.use(express.static('public'));
 app.use(morgan('dev'));
 
-app.get('/home', (req, res)=> {
+app.get('http://fifaqatarworldcup.com/home', (req, res)=> {
     res.render('home', {title: 'Home'});
 });
 
-app.get('/', (req, res)=> {
+app.get('http://fifaqatarworldcup.com/', (req, res)=> {
     res.redirect('/home');
 });
 
@@ -63,7 +66,7 @@ app.get('/add-user', (req, res)=>{
 });
 
 
-app.get('/all-users', (req, res)=> {
+app.get('http://fifaqatarworldcup.com/all-users', (req, res)=> {
     Users.find()
     .then((result)=>{
         res.send(result)
@@ -85,7 +88,7 @@ app.get('/single-user', (req, res)=> {
 }); 
 
 
-app.post('/auth/sign-up', async (req, res)=> {
+app.post('http://fifaqatarworldcup.com/auth/sign-up', async (req, res)=> {
     
     const username = req.body.username;
     const pass=req.body.pass;
@@ -121,7 +124,7 @@ app.post('/auth/sign-up', async (req, res)=> {
     });
 });
 
-app.get('auth/sign-up', (req, res)=> {
+app.get('http://fifaqatarworldcup.com/auth/sign-up', (req, res)=> {
     Users.findById('639e5e6249ddd6ebba4e8bc0')
     .then((result)=>{
         res.send(result)
@@ -148,7 +151,7 @@ app.get('auth/sign-up', (req, res)=> {
     
 }); */
 
-app.post('/auth/login', function (req, res) {
+app.post('http://fifaqatarworldcup.com/auth/login', function (req, res) {
     const email=req.body.email;
     const pass=req.body.pass;
 
@@ -174,7 +177,7 @@ app.post('/auth/login', function (req, res) {
 
 
 
-app.post("/auth/login", passport.authenticate("local", {
+app.post("http://fifaqatarworldcup.com/auth/login", passport.authenticate("local", {
 
     successRedirect: "/home",
     
@@ -185,7 +188,7 @@ app.post("/auth/login", passport.authenticate("local", {
     });
 
 
-app.delete('/:id', (req,res)=>{
+app.delete('http://fifaqatarworldcup.com/:id', (req,res)=>{
     const id = req.params.id;
 
     Users.findByIdAndDelete(id)
@@ -200,7 +203,7 @@ app.delete('/:id', (req,res)=>{
 
 //match routes
 
-app.get('/add-match', (req, res)=>{
+app.get('http://fifaqatarworldcup.com/add-match', (req, res)=>{
     const newMatch = new Match(req.body);
 
     newMatch.save()
@@ -212,7 +215,7 @@ app.get('/add-match', (req, res)=>{
 });
 
 
-app.get('/all-matches', (req, res)=> {
+app.get('http://fifaqatarworldcup.com/all-matches', (req, res)=> {
     Match.find()
     .then((result)=>{
         res.send(result)
