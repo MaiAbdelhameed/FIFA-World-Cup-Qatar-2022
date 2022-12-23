@@ -1,8 +1,7 @@
 const express = require('express');
 const userRouter = express.Router();
 const Users = require('../models/users');
-
-
+const userController=require('../controllers/userController');
 
 userRouter.get('/add-user', (req, res)=>{
     const user0= new Users({
@@ -24,15 +23,7 @@ userRouter.get('/add-user', (req, res)=>{
 });
 
 //for administrator
-userRouter.get('/all-users', (req, res)=> {
-    Users.find()
-    .then((result)=>{
-        res.send(result)
-    })
-    .catch((err)=>{
-        console.log(err)
-    });
-});
+userRouter.get('/all-users', userController.allUsers);
 
 
 userRouter.get('/single-user', (req, res)=> {
@@ -46,7 +37,7 @@ userRouter.get('/single-user', (req, res)=> {
 }); 
 
 
-userRouter.delete('/users', (req,res)=>{
+userRouter.delete('/users/:id', (req,res)=>{
     const id = req.params.id;
 
     Users.findByIdAndDelete(id)
@@ -54,6 +45,17 @@ userRouter.delete('/users', (req,res)=>{
         res.json({redirect: '/users'})
     })
     .catch((err)=>console.log(err));
+});
+
+
+userRouter.put('/users/:id', (req, res)=>{
+    const id = req.params.id;
+    Users.findByIdAndUpdate(id, req.body)
+    .then((result)=>{
+        res.send(result)
+    }).catch((err)=>{
+        console.log(err)
+    });
 });
 
 
