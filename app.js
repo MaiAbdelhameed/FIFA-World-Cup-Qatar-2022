@@ -72,7 +72,7 @@ app.get('/add-user', (req, res)=>{
 
 app.put('/user/:id', (req, res)=>{
     const id = req.params.id;
-    
+
     Users.findByIdAndUpdate(id, req.body)
     .then((result)=>{
         res.send(result)
@@ -223,7 +223,7 @@ app.post('/auth/login', function (req, res) {
     const username=req.body.username;
     const pass=req.body.pass;
 
-	Users.findOne({username}, async function(err,data){
+	const user = await Users.findOne({username}, async function(err,data){
 		if(data){ 
             //console.log(data)
             //console.log(data.password)
@@ -232,7 +232,12 @@ app.post('/auth/login', function (req, res) {
 				//console.log("Done Login");
 				//req.session.userId = data.unique_id;
 				//console.log(req.session.userId);
-				res.send({"Success":"Success!"});
+				res.json({
+                    _id:user.id,
+                    username:user.username,
+                    email: user.email,
+                    token:generateToken(user._id)
+                });
 				
 			}else{
 				res.send({"Success":"Wrong password!"});
@@ -336,11 +341,37 @@ app.delete('/single-match/:id', (req,res)=>{
 });
 
 
-function getNextSequence(sequenceName){
-    var sequenceDocument = db.Users.findAndModify({
-       query:{_id: sequenceName },
-       update: {$inc:{sequence_value:1}},
-       new:true
-    });
-    return sequenceDocument.sequence_value;
+
+const activeToken = async (req, res, next) =>{
+
+    Users.findOne({
+        activeToken: req.params.activeToken
+        //activeExpires: {$gt: DataTransfer.now()}
+    }, function (err, user) {
+        if (err) return next(err);
+
+        if (!user) {
+            return res.status(404).json({
+                sucess:false,
+                msg: 'Your activation link is invalid'
+            });
+        }
+
+        if (user.active == true){
+            return res.status(200).json({
+                success:true,
+                msg :'Your account already activated go and login'
+            });
+        }
+
+        user.acive=true;
+        user.save((err,user)=> {
+            if (err) return next(err);
+
+            res.json({
+                success:true,
+                msg:'Activation sucess'
+            });
+        });
+    })
 };
