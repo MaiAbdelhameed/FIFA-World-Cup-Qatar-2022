@@ -223,7 +223,7 @@ app.post('/auth/login', function (req, res) {
     const username=req.body.username;
     const pass=req.body.pass;
 
-	const user = await Users.findOne({username}, async function(err,data){
+	const user = Users.findOne({username}, async function(err,data){
 		if(data){ 
             //console.log(data)
             //console.log(data.password)
