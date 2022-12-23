@@ -1,9 +1,15 @@
 const { uniqueId } = require('lodash');
+const { Int32 } = require('mongodb');
 const mongoose=require('mongoose');
 
 const schema=mongoose.Schema;
 
 const matchSchema= new schema({
+    // matchID: {
+    //     type:Int32,
+    //     required: false,
+    //     unique:true
+    // },
     firstTeam: {
         type:String,
         required: true
