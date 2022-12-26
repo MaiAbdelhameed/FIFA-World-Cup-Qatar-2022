@@ -1,0 +1,18 @@
+
+.layout {
+    height: 88vh;
+    background-image: url("https://mir-s3-cdn-cf.behance.net/project_modules/max_3840/49ff9c148262295.62d22762c53b9.jpg");
+    background-size: cover;
+    background-position: center;
+    padding-top: 20vh;
+    overflow: hidden;
+    background-repeat: no-repeat;    
+}
+
+@media screen and (max-width: 500px) {
+    .layout {
+        height: 90vh;
+        background-position: 50% 190%;
+        background-image:url("https://mir-s3-cdn-cf.behance.net/project_modules/disp/277c9f148822033.62dc3b440969f.png");
+    }
+}

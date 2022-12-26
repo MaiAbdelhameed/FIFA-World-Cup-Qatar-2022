@@ -1,0 +1,217 @@
+.nav{
+    background-color: #660221;
+    opacity: 0.9;
+    padding: 4rem 10%;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+    height: 4rem;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+    z-index: 5;
+    position: fixed;
+}
+.logoContainer {
+    display: flex;
+    align-items: center;
+}
+.imgContainer {
+    width: 12rem;
+    margin-right: 1.5rem; 
+}
+.imgContainer img {
+    width: 100%;
+   
+}
+.navOptions ul li {
+    display: inline-block;
+    margin-left: 3rem;
+    padding: 1rem 0;
+}
+
+.navOptions ul li a {
+    color:white;
+    font-size: 2.5rem;
+    font-weight: 500;
+    padding: 2rem 1rem;
+    margin-right: 2rem;
+    transition: .5s ease;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    text-decoration: none;
+    font-family: 'Khand', sans-serif;
+    letter-spacing: .6rem;
+
+}
+.bur {
+    display: none;
+    z-index: 1;
+}
+
+.navOptions ul li .activeLink  {
+   border: solid 1px #e6e6e6;
+   border-radius: 15px;
+   color: #e7ba3d;
+
+   background-color: aqua;
+   color: #660221;
+}
+
+.navOptions .activeLinkL {
+    background-color: #adb3b7;
+}
+
+.options .loginL
+{
+    background-color: #ffffff;
+    color: #660221;
+    border-radius: 15px;
+    height: 1rem;
+}
+
+.navOptions ul li a:hover {
+   transition: color .4s;
+   color: #e7ba3d;
+   text-shadow:  0 2px 4px #ff921f;
+}
+
+.options .loginL:hover
+{
+    background-color: #e7ba3d;
+    box-shadow: 0 .3rem 1.3rem #ff921f;
+    color: #ffffff;
+    transition: background-color .4s;
+
+}
+.navOptions ul li h2 {
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.back {
+    position: fixed;
+    background-color: black;
+    width: 100%;
+    min-height: 200vh;
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+    right: 10%;
+    z-index:-1;
+    transition: opacity 4s ease-in-out;
+    opacity: 0;
+    display: none;
+}
+
+.ball{
+    width: 40px;
+    fill: white;
+    animation: animate-ball 4s linear infinite ;
+
+}
+
+@media screen and (max-width: 1300px) {
+    .nav {
+        padding: 5rem 6%;
+    }
+}
+
+@media screen and (max-width: 1140px) {
+    .options{
+        position: absolute;
+        width: 30rem;
+        height: 100vh;
+        padding: 10px 50px;
+        align-items: center;
+        transition: .5s ease;
+        z-index: 5;
+        clip-path: polygon(39% 0, 100% 0%, 100% 98%, 0% 100%);
+        background-image: linear-gradient(to right bottom, #660221, #660221, #b11534, #ef5836, #e7ba3d);
+    }
+    .optionsActive {
+        right: 0;
+    }
+    .sleepOptions{
+        right: -600px;
+    }
+    .bur {
+        display: inline-block;
+        
+    }
+    .navOptions {
+        position: fixed;
+        right: 0;
+        top: 0;
+        text-align: center;
+       
+    }
+    .navOptions ul li {
+        margin: 0;
+        margin-top: 4rem;;
+        display: block;
+       
+    }
+    .navOptions ul li a {
+        font-size: 4rem;
+        font-weight: 600;
+    }
+    .navOptions ul li a:hover{
+        text-shadow: none;
+    }
+    .options .loginL
+    {
+        background: none;
+        color: #ffffff;
+    }
+    .options .loginL:hover
+    {
+        background: none;
+        box-shadow: none;
+        text-shadow: none;
+        transition: color .5s;
+        color: rgb(55, 55, 55);
+    }
+
+    .navOptions ul li a:hover {
+        transition: color .5s;
+        color: rgb(55, 55, 55);
+    }
+
+   .links {
+    padding-top: 10vh;
+   }
+   .back{
+    opacity: 0.2;
+    display: inline-block;
+    }
+}
+@media screen and (max-width: 500px) {
+    .imgContainer {
+        width: 10rem;
+        margin-right: 1.5rem; 
+    }
+    .nav {
+        padding: 5rem 4%;
+        position: sticky;
+    }
+    .back{
+        opacity: 0.2;
+        display: inline-block;
+        }
+}
+
+@keyframes animate-ball{
+    0% { transform: scale(1) rotate(0deg); }
+    5% { transform: scale(0.9) rotate(18deg); }
+    10% { transform: scale(1.1) rotate(36deg); }
+    15% { transform: scale(0.9) rotate(54deg); }
+    20% { transform: scale(1.1) rotate(72deg); }
+    25% { transform: scale(1) rotate(90deg);  }
+    100% { transform: scale(1) rotate(360deg); }
+   }
+

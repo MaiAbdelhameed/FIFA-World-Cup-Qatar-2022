@@ -1,0 +1,14 @@
+.body{
+    padding-top: 10%;
+    padding-bottom: 10%;
+    background-color: #EFE9EF;
+}
+
+.title{
+        color: #660221;
+        font-size: 5rem;
+        font-family: "Poppins","Noto Sans Regular","Helvetica Neue",Arial,sans-serif;
+        font-weight: 900;
+        text-align: center;
+}
+

@@ -1,0 +1,324 @@
+.container {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    border-color: white;
+    justify-content: center;
+
+}
+
+
+.container1 {
+    
+    min-height:100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    border-color: rgb(255, 255, 255);
+}
+
+.center {
+    margin-top: 10em;
+    margin-left: 50em;
+}
+
+
+
+.box1 {
+    height: auto;
+    min-height: fit-content;
+    /* overflow-y: hidden; */
+}
+
+.box1 h1 {
+    font-family: "Poppins","Noto Sans Regular","Helvetica Neue",Arial,sans-serif;
+    color: #761c38 !important;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 3.5rem;
+}
+
+.box1,
+.box2 {
+    width: 40rem;
+    background-color: white;
+    color: #761c38;
+    padding: 2rem;
+    margin-bottom: 1rem;
+}
+
+.box1 {
+    border-radius: 10px 10px 0 0;
+}
+
+.box2 {
+    border-radius: 0 0 10px 10px;
+
+}
+
+.box1 label {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    font-family: "Poppins","Noto Sans Regular","Helvetica Neue",Arial,sans-serif;
+    font-weight: 500;
+}
+
+.fieldContainer {
+    position: relative;
+    padding: 15px 0 0;
+    margin-top: 10px;
+
+}
+
+.field {
+    font-family: inherit;
+    width: 100%;
+    border: 0;
+    border-bottom: 2px solid #761c38 !important;
+
+    outline: 0;
+    font-size: 1.3rem;
+    color: #761c38;
+    padding: 7px 0;
+    background: transparent;
+    transition: border-color 0.2s;
+    margin-bottom: 5px;
+    overflow: hidden;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    margin-bottom: 5px;
+}
+
+.field:placeholder-shown~.label {
+    font-size: 1.4rem;
+    cursor: text;
+    top: 20px;
+    color: #761c38;
+}
+
+.field::placeholder {
+    color: transparent;
+
+}
+
+.field::-webkit-outer-spin-button,
+.field::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.field[type=number] {
+    -moz-appearance: textfield;
+}
+
+.label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1.5rem;    
+    color: #761c38 !important;
+
+}
+
+.field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #c5d6d5, #ffffff);
+    border-image-slice: 1;
+    color: #761c38 !important;
+    
+
+}
+
+
+.field:focus~.label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #761c38 !important;
+
+}
+
+.field:required,
+.field:invalid {
+    box-shadow: none;
+    
+}
+
+.fieldContainer span {
+    color: red;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.btn {
+    margin-top: 2rem;
+    width: 100%;
+    text-align: center;
+    
+}
+
+.btn button {
+    font-family: "Poppins","Noto Sans Regular","Helvetica Neue",Arial,sans-serif;
+    font-weight: 600;
+    letter-spacing: .05rem;
+    width: 20rem;
+    padding: 1rem 0;
+    font-size: 2rem;
+    border-radius: 10px;
+    border-color:#761c38 !important;
+    border: solid #761c38;
+    background: transparent;
+    background-image: url('../../img/button.png');
+    background-repeat: repeat-x;
+    background-position: 0 -100%;
+    transition: 1.5s ease;
+    color: #761c38;
+    
+}
+
+.btn button:hover {
+    background-color: #660221;
+    box-shadow: 0 .3rem 1.3rem #b11534;
+    color: #ffffff;
+    transition: background-color .4s;
+}
+
+.box2 p {
+    font-size: 1.7rem;
+    text-align: center;
+    color: #761c38 !important;
+
+}
+
+.box2 span {
+    cursor: pointer;
+    color: #761c38 !important;
+    font-weight: 800;
+    font-size: 15px;
+    font-family: "Poppins","Noto Sans Regular","Helvetica Neue",Arial,sans-serif;
+    font-weight: 600;
+    letter-spacing: .05rem;
+}
+
+.logo {
+    width: 15%;
+    padding-bottom: 50px;
+    padding-right: 20px;
+}
+
+.its {
+    font-family: 'Fredoka One', cursive;
+    font-size: 20px;
+    color: #761c38 !important;
+    letter-spacing: 3px;
+    margin-bottom: 2%;
+}
+
+.header1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.header2 h1 {
+    color:  #761c38 !important;
+
+    font-family: "Poppins","Noto Sans Regular","Helvetica Neue",Arial,sans-serif;
+    font-weight: 500;
+    font-size: 5rem;
+    letter-spacing: .12rem;
+}
+
+.errorMsg {
+    text-shadow: 0 0 .5px #FF0000;
+    color: red;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding-top: 12px;
+
+}
+
+.radio {
+    display: flex;
+    flex-direction: row;
+    gap: 10%;
+
+}
+
+.radioLabel {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.radioPlace {
+    padding-right: 20px
+}
+
+.radioPlace1 {
+    padding-right: 3px;
+}
+
+.option {
+    background-color: #0e1b42c6;
+}
+
+.modalHeader {
+    margin-bottom: 10px;
+}
+
+.boxParagraph {
+    color: rgb(0, 0, 0);
+    font-size: small;
+}
+.errorMsgFP {
+    color: red;
+    font-size: 1.2rem;
+    padding-top: 0.4rem;
+    padding-left: 1rem;
+
+}
+
+.box11 h1 {
+    text-align: center;
+    margin-bottom: 5rem;
+    font-size: 3.5rem;
+
+}
+.box11{
+    width: 40rem;
+    background-color: rgb(255, 255, 255);
+    color: #761c38;
+    padding: 2rem;
+    margin-bottom: 2rem;
+
+}
+.box11 {
+    border-radius: 10px 10px 10px 10px;
+}
+.box11 label {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+}
+

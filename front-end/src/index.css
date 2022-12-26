@@ -1,0 +1,53 @@
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  
+}
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Fjalla One', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@media screen and (max-width: 500px) {
+
+  html, body {
+    font-size: 60%;
+    overflow-x: hidden;
+  }
+  
+
+}
+@media screen and (max-width: 450px) {
+
+  html {
+    font-size: 55%;
+  }
+
+}
+@media screen and (max-width: 400px) {
+
+  html {
+    font-size: 50%;
+  }
+
+}
+@media screen and (max-width: 350px) {
+
+  html {
+    font-size: 45%;
+  }
+
+}

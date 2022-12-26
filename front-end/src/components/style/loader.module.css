@@ -1,0 +1,24 @@
+.body
+{
+    background-color: #efe9ef;
+    opacity: 0.9;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.body img
+{
+    animation: animate-ball 3s linear infinite;
+    width: 8rem;
+    margin: auto;
+}
+@keyframes animate-ball{
+    0% { transform: rotate(0deg); }
+    5% { transform:  rotate(18deg); }
+    10% { transform:  rotate(36deg); }
+    15% { transform:  rotate(54deg); }
+    20% { transform:  rotate(72deg); }
+    25% { transform: rotate(90deg);  }
+    100% { transform: rotate(360deg); }
+   }

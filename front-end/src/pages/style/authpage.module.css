@@ -1,0 +1,32 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden !important;
+    background-size: 100%;
+    background-image: linear-gradient(to right bottom, #660221, #660221, #b11534, #ef5836, #e7ba3d);
+    opacity: .9;
+}
+
+.dataarea
+{
+    display: flex;
+
+    flex-direction: row;
+}
+
+.log{
+    flex:1;
+    overflow-y: hidden !important;
+}
+
+@media screen and (max-width: 1200px) {
+
+ 
+}
+
+@media screen and (max-width: 500px) {
+    .log{
+        transform: translate(0%, -10%);
+        max-width: 100%;
+    }
+}
