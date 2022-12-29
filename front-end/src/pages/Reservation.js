@@ -3,6 +3,7 @@ import axios from 'axios';
 import classes from './style/predictionpage.module.css'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import Seating from '../components/Seating';
 
 
 import Loader from '../components/Loader';
@@ -40,7 +41,7 @@ const Reservation = () => {
       {/* TODO: implement conditionally rendered button  */}
       {/* {me?<div className={classes.btn}><button onClick={checkResp}>Submit</button></div>:null} */} 
       
-
+    <Seating/>
     </div>
       }
     </>

@@ -242,10 +242,9 @@
 }
 
 .header2 h1 {
-    color:  #761c38 !important;
-
+    color:  #e38d2a !important;
+    font-weight: 600;
     font-family: "Poppins","Noto Sans Regular","Helvetica Neue",Arial,sans-serif;
-    font-weight: 500;
     font-size: 5rem;
     letter-spacing: .12rem;
 }
