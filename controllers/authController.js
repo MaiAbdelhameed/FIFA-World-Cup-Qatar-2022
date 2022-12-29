@@ -1,7 +1,10 @@
+const config = require("../config/auth.config");
+const Users=require('../models/users');
 
+var jwt = require("jsonwebtoken");
+var bcrypt = require("bcryptjs");
 
-const register= async (req, res) =>{
-     
+exports.signup = async (req, res) => {
     try {
         //const userID=getNextSequence("userID");
         const username = req.body.username;
@@ -22,12 +25,12 @@ const register= async (req, res) =>{
 
         var oldUser = await Users.findOne({ email });
         if (oldUser) {
-            return res.status(409).send("User Already Exist. Please Login");
+            return res.status(409).send("Email already registered. Please login");
             }
         
         var oldUser = await Users.findOne({ username });
         if (oldUser) {
-            return res.status(409).send("User Already Exist. Please Login");
+            return res.status(409).send("User already registered. Please login");
             }
 
         const newUser = new Users({
@@ -43,38 +46,22 @@ const register= async (req, res) =>{
             role
         });
 
+        
+        //generating user token
+        const token = await Users.generateAuthToken();
+        newUser.token=token;
+        console.log(token);
+
         newUser.save()
         .then((result)=>{
-            res.send(result)
+            res.send({result, token})
         }).catch((err)=>{
             console.log(err)
         });
 
-        //generating user token
-        let jwtSecretKey = process.env.JWT_SECRET_KEY;
-        let data = {
-            time: Date(),
-            userId: 12,
-        }
-
-        const token = jwt.sign(data, jwtSecretKey);
-        newUser.token=token;
-        res.setHeader();
-        res.send(token);
+        
         }
     catch (err) {
         console.log(err);
     }
 };
-
-
-
-const login=
-
-
-
-
-
-module.exports={register};
-module.exports={login};
-//module.exports={authenticate};

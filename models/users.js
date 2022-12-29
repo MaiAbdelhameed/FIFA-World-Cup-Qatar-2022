@@ -62,7 +62,7 @@ usersSchema.statics.findByCredentials = async function(username,pass) {
     if(pass!== user.pass) {
         throw new Error ('Incorrect Password !')
     } else {
-        return user
+        return user.role
     }
 }
 

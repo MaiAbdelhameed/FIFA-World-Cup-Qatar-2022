@@ -66,6 +66,7 @@ app.get('/add-user', (req, res)=>{
         res.send(result)
     }).catch((err)=>{
         console.log(err)
+        res.status(400).send(err);
     });
 });
 
@@ -78,6 +79,7 @@ app.put('/user/:id', (req, res)=>{
         res.send(result)
     }).catch((err)=>{
         console.log(err)
+        res.status(400).send(err);
     });
 });
 
@@ -89,6 +91,7 @@ app.get('/all-users', (req, res)=> {
     })
     .catch((err)=>{
         console.log(err)
+        res.status(400).send(err);
     });
 });
 
@@ -100,10 +103,11 @@ app.get('/single-user', (req, res)=> {
     })
     .catch((err)=>{
         console.log(err)
+        res.status(400).send(err);
     });
 }); 
 
-
+/////////////auth rotes//////
 app.post('/auth/sign-up', async (req, res)=> {
     
     try {
@@ -164,6 +168,7 @@ app.post('/auth/sign-up', async (req, res)=> {
         }
     catch (err) {
         console.log(err);
+        res.status(400).send(err);
     }
 });
 
@@ -174,15 +179,16 @@ app.get('/auth/sign-up', (req, res)=> {
     })
     .catch((err)=>{
         console.log(err)
+        res.status(400).send(err);
     });
 })
 
 app.post('/auth/login', async (req, res) => {
     try {
-      const user = await Users.findByCredentials(req.body.username,req.body.pass);
+      const userRole = await Users.findByCredentials(req.body.username,req.body.pass);
       const token = await Users.generateAuthToken();
       console.log(token);
-      res.send({ user, token });
+      res.send({ userRole, token });
     }
     catch(err){
         console.log(err);
@@ -262,7 +268,7 @@ app.delete('/single-match/:id', (req,res)=>{
 });
 
 
-
+/* 
 const activeToken = async (req, res, next) =>{
 
     Users.findOne({
@@ -295,4 +301,4 @@ const activeToken = async (req, res, next) =>{
             });
         });
     })
-};
+}; */
