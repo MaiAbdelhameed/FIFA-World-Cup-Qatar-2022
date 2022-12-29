@@ -147,49 +147,24 @@ app.post('/auth/sign-up', async (req, res)=> {
             role
         });
 
+        
+        //generating user token
+        const token = await Users.generateAuthToken();
+        newUser.token=token;
+        console.log(token);
+
         newUser.save()
         .then((result)=>{
-            res.send(result)
+            res.send({result, token})
         }).catch((err)=>{
             console.log(err)
         });
 
-        //generating user token
-        let jwtSecretKey = process.env.JWT_SECRET_KEY;
-        let data = {
-            time: Date(),
-            userId: 12,
-        }
-
-        const token = jwt.sign(data, jwtSecretKey);
-        newUser.token=token;
-        res.setHeader();
-        res.send(token);
+        
         }
     catch (err) {
         console.log(err);
     }
-
-
-
-        // //create token
-        // const token = jwt.sign(
-        //     { user_id: newUser._id, email },
-        //     process.env.TOKEN_KEY,
-        //     {
-        //         expiresIn: "2h",
-        //     }
-        //     );
-
-        //     // save user token
-        // newUser.token = token;
-
-        // // return new user
-        // res.status(201).json(newUser);
-        // } 
-        // catch (err) {
-        //     console.log(err);}
-
 });
 
 app.get('/auth/sign-up', (req, res)=> {
@@ -202,30 +177,11 @@ app.get('/auth/sign-up', (req, res)=> {
     });
 })
 
-/* app.post('/auth/login', async (req, res)=> {
-    
-    const email=req.body.email;
-    const pass=req.body.pass;
-    // const validPassword = await bcrypt.compare(pass, hashedPassword);
-    
-    const exists = Users.findOne({
-        email
-    });
-    
-    if (exists)
-        res.json({redirect: '/home'});
-    else
-        res.send('no');
-    
-}); */
-
 app.post('/auth/login', async (req, res) => {
     try {
-      const user = await Users.findByCredentials(
-        req.body.username,
-        req.body.pass
-      );
+      const user = await Users.findByCredentials(req.body.username,req.body.pass);
       const token = await Users.generateAuthToken();
+      console.log(token);
       res.send({ user, token });
     }
     catch(err){
