@@ -219,55 +219,20 @@ app.get('/auth/sign-up', (req, res)=> {
     
 }); */
 
-app.post('/auth/login', function (req, res) {
-    const username=req.body.username;
-    const pass=req.body.pass;
-    
-	const user = Users.findOne({username}, async function(err,data){
-		if(data){ 
-            //console.log(data)
-            //console.log(data.password)
-            //const validPassword = await bcrypt.compare(pass, hashedPassword);
-			if(data.pass==pass){
-				//console.log("Done Login");
-				//req.session.userId = data.unique_id;
-				//console.log(req.session.userId);
-				res.json({
-                    _id:user.id,
-                    username:user.username,
-                    email: user.email,
-                    token:generateToken(user._id)
-                });
-				
-			}else{
-				res.send({"Success":"Wrong password!"});
-			}
-		}else{
-			res.send({"Success":"This username Is not regestered!"});
-		}
-	});
-
-    let tokenHeaderKey = process.env.TOKEN_HEADER_KEY;
-    let jwtSecretKey = process.env.JWT_SECRET_KEY;
-  
+app.post('/auth/login', async (req, res) => {
     try {
-        const token = req.get(tokenHeaderKey);
-  
-        const verified = jwt.verify(token, jwtSecretKey);
-        if(verified){
-           res.send("Successfully Verified");
-        }
-        else {
-            res.send("not verified");
-        }
-    } catch (error) {
-        // Access Denied
-        console.log(error);
+      const user = await Users.findByCredentials(
+        req.body.username,
+        req.body.pass
+      );
+      const token = await Users.generateAuthToken();
+      res.send({ user, token });
     }
-
-
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    }
 });
-
 
 
 app.post("/auth/login", passport.authenticate("local", {
