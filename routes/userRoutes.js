@@ -7,15 +7,15 @@ const auth = require('../middleware/authJwt');
 /////////////////////////get requests//////////////////////////
 userRouter.get('/all-users', auth.adminAuth, userController.allUsers);
 
-userRouter.get('/single-user',auth.adminAuth ,userController.singleUser); 
+userRouter.get('/single-user/:id',userController.singleUser); 
 
 
 /////////////////////////delete requests//////////////////////////
-userRouter.delete('/:id', auth.adminAuth, userController.deleteUser);
+userRouter.delete('delete/:id', auth.adminAuth, userController.deleteUser);
 
 
 /////////////////////////put requests//////////////////////////
-userRouter.put('/:id', auth.fanAuth,userController.editUser);
+userRouter.put('update/:id', auth.fanAuth,userController.editUser);
 
 
 module.exports=userRouter;

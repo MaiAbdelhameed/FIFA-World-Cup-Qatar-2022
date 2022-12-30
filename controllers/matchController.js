@@ -26,14 +26,16 @@ exports.allMatches = async (req, res)=> {
 };
 
 
-exports.singleMatch= async (req, res)=> {
-    const matchid=req.params.id;
-    await Match.findById(matchid)
+exports.singleMatch = async (req, res)=> {
+    const match_id=req.params.id;
+    await Match.findById(match_id)
     .then((result)=>{
-        res.send(result)
+        console.log(result);
+        res.send(result);
     })
     .catch((err)=>{
         console.log(err)
+        res.status(404).send(err);
     });
 };
 
