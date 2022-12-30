@@ -22,7 +22,7 @@ const matchSchema= new schema({
         required: true
     },
     time: {
-        type:Date,
+        type:String,
         required: true
     },
     referee: {
