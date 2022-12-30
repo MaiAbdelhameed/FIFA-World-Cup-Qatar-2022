@@ -10,15 +10,15 @@ authRouter.post('/sign-up',authController.signup);
 
 authRouter.post('/login', authController.login);
 
-authRouter.post("/login", passport.authenticate("local", {
+// authRouter.post("/login", passport.authenticate("local", {
 
-    successRedirect: "/home",
+//     successRedirect: "/home",
     
-    failureRedirect: "/auth/login"
+//     failureRedirect: "/auth/login"
     
-    }), function (req, res) {
+//     }), function (req, res) {
     
-    });
+//     });
 
 
 
