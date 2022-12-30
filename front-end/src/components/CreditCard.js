@@ -1,7 +1,35 @@
-import * as React from "react";
+import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 import "./style/creditcard.css";
 
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4
+};
+
 const CreditCard = () => {
+  const [num, setNum] = useState(0);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+    setNum(randomNumberInRange(1000000, 2000000));
+  };
+  const handleClose = () => setOpen(false);
+
+  function randomNumberInRange(min, max) {
+    // 👇️ get number between min (inclusive) and max (inclusive)
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   return (
     <div>
       <form class="credit-card">
@@ -52,9 +80,24 @@ const CreditCard = () => {
           <div class="cvv-details">
             <p>3 or 4 digits usually found on the signature strip</p>
           </div>
-          <button type="submit" class="proceed-btn">
+          <button onClick={handleOpen} type="submit" class="proceed-btn">
             <a href="#">Proceed</a>
           </button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Thanks for your purchase!
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                Your ticket number is: {num}
+              </Typography>
+            </Box>
+          </Modal>
         </div>
       </form>
     </div>

@@ -4,28 +4,31 @@ import matches from "../matches";
 import Seat from "./Seat";
 
 
-
-var isSold = true;
-
 function Seating(props) {
-  var manyRows = props.rows;
-  var manySeats = props.seats;
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [numSelected, setnumSelected] = useState(0);
+  const [isSelected, setSelected] = useState(false);
 
-  
+  const selectSeat = (event) => {
+    setSelected((isSelected) => !isSelected);
+    if (isSelected) {
+      setnumSelected((numSelected) => numSelected++);
+      console.log(numSelected);
+    } else {
+      setnumSelected((numSelected) => numSelected--);
+      console.log(numSelected);
+    }
+  };
 
-  const drawGrid =    
-  matches[1].area.map(row => {
+  const drawGrid = props.area.map((row) => {
     return (
       <div className="row">
-        { 
-          row.map((i) => <Seat  val={i}/> 
-          ) 
-        }
+        {row.map((i) => (
+          <Seat val={i} />
+        ))}
       </div>
-    ) 
+    );
   });
-
-
 
   return (
     <div>
@@ -33,28 +36,28 @@ function Seating(props) {
         <div class="match-container">
           <label>
             {" "}
-            Match {matches[0].id}: {matches[0].name}. Date: {matches[0].date}
+            Match {props.id}: {props.name}. Date: {props.date}
           </label>
         </div>
-
         <ul class="showcase">
           <li>
             <div class="seat"></div>
             <small>Available</small>
           </li>
           <li>
-            <div class="seat selected"></div>
-            <small>Selected</small>
+            <div class={isLoggedIn ? "seat selected" : "disappear"}></div>
+            <small class={isLoggedIn ? "" : "disappear"}>Selected</small>
           </li>
           <li>
             <div class="seat sold"></div>
             <small>Sold</small>
           </li>
         </ul>
+
         <div class="container">
           <div class="screen"></div>
 
-            <div>{drawGrid}</div>
+          <div>{drawGrid}</div>
         </div>
       </body>
     </div>
