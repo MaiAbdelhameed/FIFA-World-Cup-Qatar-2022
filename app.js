@@ -58,4 +58,4 @@ app.use('/matches', matchRouter);
 
 
 /////////////reservations routes//////////////
-//app.set('/rservations', reservationsRouter);
+//app.set('/reserve', reservationsRouter);

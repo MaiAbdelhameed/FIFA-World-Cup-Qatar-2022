@@ -1,15 +1,19 @@
 const Match = require('../models/matches');
 
 exports.addMatch= async (req, res)=>{
-    const newMatch = new Match(req.body);
-
-    newMatch.save()
-    .then((result)=>{
-        res.send(result)
-    }).catch((err)=>{
-        console.log(err)
-    });
+    try {
+        const match = await Match.create({ ...req.body});
+        if (!(match.firstTeam && match.secondTeam && match.venue && match.date && match.time && match.referee && match.firstLinesmen && match.secondLinesmen)) {
+            res.status(400).send("Please fill all required inputs");
+        }
+        
+        return res.json(match);
+    }
+    catch (err) {
+        return res.status(400).json({ message: err.message });
+      }
 };
+
 
 exports.allMatches = async (req, res)=> {
     await Match.find().sort({createdAt:-1})

@@ -4,9 +4,6 @@ const mongoose=require('mongoose');
 const schema=mongoose.Schema;
 
 const stadiumSchema = new schema({
-    stadiumId:{
-        type: Int32
-    },
     venue:{
         type: String,
         required:true

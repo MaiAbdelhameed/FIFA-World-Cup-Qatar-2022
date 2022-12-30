@@ -17,7 +17,11 @@ const matchSchema= new schema({
         type:String,
         required: true
     },
-    dateTime: {
+    date: {
+        type:Date,
+        required: true
+    },
+    time: {
         type:Date,
         required: true
     },
