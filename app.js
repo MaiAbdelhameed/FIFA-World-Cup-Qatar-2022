@@ -5,6 +5,8 @@ const morgan = require('morgan');
 const mongoose= require('mongoose');
 const bp = require('body-parser');
 const app= express();
+var cors = require("cors");
+app.use(cors());
 //const bcrypt = require('bcrypt');
 const userRouter = require('./routes/userRoutes');
 const authRouter = require('./routes/authRoutes');
@@ -14,7 +16,7 @@ const matchRouter = require('./routes/matchRoutes');
 
 
 app.use(express.json());
-
+app.use(cors());
 // Set up Global configuration access
 dotenv.config();
 
