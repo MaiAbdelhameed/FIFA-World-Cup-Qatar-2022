@@ -1,123 +1,110 @@
 const jwt = require("jsonwebtoken");
-const config = require("../config/auth.config.js");
-const db = require("../models");
-const User = db.user;
-const Role = db.role;
+const config = require("../auth.config.js");
+const auths = {};
+const Users = require('../models/users.js');
 
-verifyToken = (req, res, next) => {
-  let token = req.headers["x-access-token"];
 
-  if (!token) {
-    return res.status(403).send({ message: "No token provided!" });
-  }
+auths.fanAuth = (req, res, next) => {
 
-  jwt.verify(token, config.secret, (err, decoded) => {
-    if (err) {
-      return res.status(401).send({ message: "Unauthorized!" });
-    }
-    req.userId = decoded.id;
-    next();
-  });
-};
-
-isAdmin = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-
-    Role.find(
-      {
-        _id: { $in: user.roles }
-      },
-      (err, roles) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
-
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "admin") {
-            next();
-            return;
-          }
-        }
-
-        res.status(403).send({ message: "Require Admin Role!" });
-        return;
-      }
-    );
-  });
-};
-
-isManager = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
-
-    Role.find(
-      {
-        _id: { $in: user.roles }
-      },
-      (err, roles) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
-
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "manager") {
-            next();
-            return;
-          }
-        }
-
-        res.status(403).send({ message: "Require Manager Role!" });
-        return;
-      }
-    );
-  });
-};
-
-isFan = (req, res, next) => {
-    User.findById(req.userId).exec((err, user) => {
-      if (err) {
-        res.status(500).send({ message: err });
-        return;
-      }
-  
-      Role.find(
-        {
-          _id: { $in: user.roles }
-        },
-        (err, roles) => {
-          if (err) {
-            res.status(500).send({ message: err });
-            return;
-          }
-  
-          for (let i = 0; i < roles.length; i++) {
-            if (roles[i].name === "fan") {
+  var token
+  try {  
+      if(req.headers.authorization ||req.session.token){
+        if (req.headers.authorization) {
+          token = req.headers.authorization.split(" ")[1];
+         }
+        else if(req.session.token){
+          token=req.session.token
+         }
+        
+          if (token) {
+              const decodedToken = jwt.verify(token, process.env.JWT_KEY);
+              req.userData = decodedToken;
               next();
-              return;
-            }
+          } else {
+              handleError(null, next);
           }
-  
-          res.status(403).send({ message: "Require Fan Role!" });
-          return;
-        }
-      );
-    });
-  };
-  
-
-const authJwt = {
-  verifyToken,
-  isAdmin,
-  isManager,
-  isFan
+      } else {
+          handleError(null, next);
+      }
+  } catch (error) {
+      handleError(error, next);
+  }
 };
-module.exports = authJwt;
+
+
+auths.adminAuth = async (req, res, next) => {
+  try {
+      if(req.headers.authorization ||req.session.token){
+        if (req.headers.authorization) {
+          token = req.headers.authorization.split(" ")[1];
+         }
+        else if(req.session.token){
+      
+          token=req.session.token
+         }
+          if (token) {
+              const decodedToken = jwt.verify(token, process.env.JWT_KEY);
+              req.userData = decodedToken;
+              let user=await Users.findById(req.userData._id);
+              console.log(user);
+              if (user.role != "admin") {
+                  throw new Error();
+              }
+              next();
+          } else {
+              handleError(null, next);
+          }
+      } else {
+          handleError(null, next);
+      }
+  } catch (error) {
+      handleError(error, next);
+  }
+};
+
+
+auths.managerAuth = async (req, res, next) => {
+    try {
+        if(req.headers.authorization ||req.session.token){
+          if (req.headers.authorization) {
+            token = req.headers.authorization.split(" ")[1];
+           }
+          else if(req.session.token){
+        
+            token=req.session.token
+           }
+            if (token) {
+                const decodedToken = jwt.verify(token, process.env.JWT_KEY);
+                req.userData = decodedToken;
+                let user=await Users.findById(req.userData._id);
+                console.log(user);
+                if (user.role != "manager") {
+                    throw new Error();
+                }
+                next();
+            } else {
+                handleError(null, next);
+            }
+        } else {
+            handleError(null, next);
+        }
+    } catch (error) {
+        handleError(error, next);
+    }
+  };
+
+module.exports = auths
+
+function handleError(error, next) {
+  if (error) {
+      error.message = 'Auth Failed!!!';
+      error.status = 401
+      next(error);
+  } else {
+      const error = new Error();
+      error.message = 'Auth Failed!!';
+      error.status = 401
+      next(error);
+  }
+}
+

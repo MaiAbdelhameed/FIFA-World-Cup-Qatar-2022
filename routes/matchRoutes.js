@@ -1,52 +1,23 @@
 const express = require('express');
-
 const matchRouter = express.Router();
-const Match = require('../models/matches');
+const matchController=require('../controllers/matchController');
+const auth = require('../middleware/authJwt');
+
+//////////////////post requests//////////////////////
+matchRouter.post('/add-match', auth.managerAuth, matchController.addMatch);
 
 
-matchRouter.get('/add-match', (req, res)=>{
-    const newMatch = new Match(req.body);
-
-    newMatch.save()
-    .then((result)=>{
-        res.send(result)
-    }).catch((err)=>{
-        console.log(err)
-    });
-});
+//////////////////get requests//////////////////////
+matchRouter.get('/all-matches', auth.managerAuth, matchController.allMatches);
+matchRouter.get('/single-match', auth.managerAuth, matchController.singleMatch);
 
 
-matchRouter.get('/all-matches', (req, res)=> {
-    Match.find()
-    .then((result)=>{
-        res.send(result)
-    })
-    .catch((err)=>{
-        console.log(err)
-    });
-});
+///////////////////delete requests////////////////////////////////
+matchRouter.delete('/match/:id', auth.managerAuth, matchController.deleteMatch);
 
 
-matchRouter.get('/single-match', (req, res)=> {
-    Match.findById('')
-    .then((result)=>{
-        res.send(result)
-    })
-    .catch((err)=>{
-        console.log(err)
-    });
-});
-
-
-matchRouter.delete('/single-match/:id', (req,res)=>{
-    const id = req.params.id;
-
-    Match.findByIdAndDelete(id)
-    .then(result => {
-        res.json({redirect: '/all-matches'})
-    })
-    .catch((err)=>console.log(err));
-});
+///////////////////put requests////////////////////////////////
+matchRouter.put('/match/:id', auth.managerAuth, matchController.editMatch);
 
 
 module.exports=matchRouter;

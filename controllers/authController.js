@@ -1,67 +1,47 @@
-const config = require("../config/auth.config");
+//const config = require("../config/auth.config");
 const Users=require('../models/users');
-
-var jwt = require("jsonwebtoken");
-var bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+//var bcrypt = require("bcryptjs");
 
 exports.signup = async (req, res) => {
     try {
-        //const userID=getNextSequence("userID");
-        const username = req.body.username;
-        const pass=req.body.pass;
-        const firstName = req.body.firstName;
-        const lastName = req.body.lastName;
-        const birthDate=req.body.birthDate;
-        const gender= req.body.gender;
-        const nationality=req.body.nationality;
-        const email = req.body.email;
-        const role=req.body.role;
-        if (!(username && pass && firstName && lastName && birthDate && gender && email && role)) {
+        const user = await Users.create({ ...req.body});
+        if (!(user.username && user.pass && user.firstName && user.lastName && user.birthDate && user.gender && user.email && user.role)) {
             res.status(400).send("Please fill all required inputs");
-            }
-
-        // const saltPassword = await bcrypt.genSalt(12)
-        // const securePassword = await bcrypt.hash(request.body.password, saltPassword)
-
-        var oldUser = await Users.findOne({ email });
-        if (oldUser) {
-            return res.status(409).send("Email already registered. Please login");
-            }
-        
-        var oldUser = await Users.findOne({ username });
-        if (oldUser) {
-            return res.status(409).send("User already registered. Please login");
-            }
-
-        const newUser = new Users({
-           // userID,
-            username,
-            pass,
-            firstName, 
-            lastName,
-            birthDate,
-            gender,
-            nationality,
-            email,
-            role
-        });
-
-        
-        //generating user token
-        const token = await Users.generateAuthToken();
-        newUser.token=token;
-        console.log(token);
-
-        newUser.save()
-        .then((result)=>{
-            res.send({result, token})
-        }).catch((err)=>{
-            console.log(err)
-        });
-
-        
         }
-    catch (err) {
-        console.log(err);
+        
+        return res.json(user);
     }
+    catch (err) {
+        return res.status(400).json({ message: err.message });
+      }
 };
+
+
+
+exports.login =  async (req, res) => {
+    try {
+        let user
+        if(req.body.username ){
+        user = await Users.findOne({ username: req.body.username });
+
+        if (!user) {
+            throw new Error("User is not found");
+          }
+
+          if (req.body.pass !== user.pass) {
+            throw new Error("Password is incorrect");
+          }
+      
+          const token = await user.generateAuthToken();
+      
+          return res.json({ token, user });
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send(err);
+    }
+}
+
+

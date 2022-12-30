@@ -4,7 +4,6 @@ const mongoose=require('mongoose');
 const schema=mongoose.Schema;
 
 const reservationsSchema = new schema({
-    //username of the person who reserved
     reserve:{
         type:String,
         required: true

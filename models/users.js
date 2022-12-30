@@ -29,7 +29,7 @@ const usersSchema=new schema({
         required: true
     },
     birthDate: {
-        type: String,
+        type: Date,
         required: true
     },
     gender: {
@@ -62,14 +62,15 @@ usersSchema.statics.findByCredentials = async function(username,pass) {
     if(pass!== user.pass) {
         throw new Error ('Incorrect Password !')
     } else {
-        return user.role
+        return user
     }
 }
 
-usersSchema.statics.generateAuthToken = async function(){
-    const User = this    
-const token = jwt.sign({_id:User._id},'thisisnewuser', {
-    expiresIn:'24h'})
+usersSchema.methods.generateAuthToken = async function(){
+    const user = this    
+    const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_KEY, {
+        expiresIn: "24h", // expires in 365 days
+      });
     return token
 }
 

@@ -1,62 +1,21 @@
 const express = require('express');
 const userRouter = express.Router();
-const Users = require('../models/users');
-const userController=require('../controllers/userController');
-
-userRouter.get('/add-user', (req, res)=>{
-    const user0= new Users({
-        username: 'maiii',
-        pass: '1234',
-        firstName: 'Maii',
-        lastName: 'Abdelhameed',
-        birthDate: "2001-01-28",
-        gender: 'Female',
-        email: 'mai@gmail.com',
-        role: 'manager'
-    });
-    user0.save()
-    .then((result)=>{
-        res.send(result)
-    }).catch((err)=>{
-        console.log(err)
-    });
-});
-
-//for administrator
-userRouter.get('/all-users', userController.allUsers);
+const userController=require('../controllers/userController.js');
+const auth = require('../middleware/authJwt');
 
 
-userRouter.get('/single-user', (req, res)=> {
-    Users.findById()
-    .then((result)=>{
-        res.send(result)
-    })
-    .catch((err)=>{
-        console.log(err)
-    });
-}); 
+/////////////////////////get requests//////////////////////////
+userRouter.get('/all-users', auth.adminAuth, userController.allUsers);
+
+userRouter.get('/single-user',auth.adminAuth ,userController.singleUser); 
 
 
-userRouter.delete('/users/:id', (req,res)=>{
-    const id = req.params.id;
-
-    Users.findByIdAndDelete(id)
-    .then(result => {
-        res.json({redirect: '/users'})
-    })
-    .catch((err)=>console.log(err));
-});
+/////////////////////////delete requests//////////////////////////
+userRouter.delete('/:id', auth.adminAuth, userController.deleteUser);
 
 
-userRouter.put('/users/:id', (req, res)=>{
-    const id = req.params.id;
-    Users.findByIdAndUpdate(id, req.body)
-    .then((result)=>{
-        res.send(result)
-    }).catch((err)=>{
-        console.log(err)
-    });
-});
+/////////////////////////put requests//////////////////////////
+userRouter.put('/:id', auth.fanAuth,userController.editUser);
 
 
 module.exports=userRouter;
