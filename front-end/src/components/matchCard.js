@@ -11,28 +11,30 @@ const MatchCard = () => {
 
 
     const initialValues = {
-        team1: '',
-        team2: '',
-        venue: '',
+        firstTeam:'',
+        secondTeam:'',
+        venue:'',
+        date:'',
+        time:'',
+        referee:'',
+        firstLinesmen:'',
+        secondLinesmen:'',
         
     }
     
     const validationSchema = Yup.object().shape({ 
-        emailorusername: Yup.string().trim().required("username or email can't be empty"),
-        password: Yup.string().trim().required("password field is required")
+
 
     })
     const onSubmit = (data, { resetForm }) => {
         async function sendData() {
             try {
-                data.emailorusername=data.emailorusername.trim();
-                data.emailorusername=data.emailorusername.toLowerCase();
-                const request = await axios.post("https://fifa-world-cup.onrender.com/api/user/login", data)
-                sessionStorage.setItem("tokenValue", request.data.token)
-                sessionStorage.setItem("ID", request.data.user._id)
-                sessionStorage.setItem("username", request.data.user.username)
-                sessionStorage.setItem("Validity", 0)
-                
+
+                const request = await axios.post("https://http-fifaqatarworldcup-com.onrender.com/matches/add-match", data, 
+                { headers: { Authorization: `Bearer ${sessionStorage.getItem("tokenValue")}` } }).then((res) => {
+                    console.log(res)
+                })
+
                 resetForm()
                 window.location.reload(false);
 
@@ -56,11 +58,11 @@ const MatchCard = () => {
                         <Form>
                             <div className={classes.Teams}>
                                 <div className={classes.fieldContainer}>
-                                    <Field className={classes.field} name='team1' placeholder="Team1" autoComplete="off" />
+                                    <Field className={classes.field} name='firstTeam' placeholder="Team1" autoComplete="off" />
                                     <label className={classes.label}>Team1</label>
                                 </div>
                                 <div className={classes.fieldContainer}>
-                                    <Field className={classes.field} name='team2' placeholder="Team2" autoComplete="off" />
+                                    <Field className={classes.field} name='secondTeam' placeholder="Team2" autoComplete="off" />
                                     <label className={classes.label}>Team2</label>
                                 </div>
                             </div>
@@ -87,11 +89,11 @@ const MatchCard = () => {
 
                             <div className={classes.Teams}>
                                 <div className={classes.fieldContainer}>
-                                    <Field className={classes.field} name='linesman1' placeholder="linesman1" autoComplete="off" />
+                                    <Field className={classes.field} name='firstLinesmen' placeholder="linesman1" autoComplete="off" />
                                     <label className={classes.label}>First Lineman</label>
                                 </div>
                                 <div className={classes.fieldContainer}>
-                                    <Field className={classes.field} name='linesman1' placeholder="linesman2" autoComplete="off" />
+                                    <Field className={classes.field} name='secondLinesmen' placeholder="linesman2" autoComplete="off" />
                                     <label className={classes.label}>First Lineman</label>
                                 </div>
                             </div>

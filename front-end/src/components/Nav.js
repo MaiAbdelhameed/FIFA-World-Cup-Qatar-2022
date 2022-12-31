@@ -47,7 +47,7 @@ const Nav = () => {
                 <NavLink to={"/Reserve/"} onClick={() => changeLocation("/Reserve/"+sessionStorage.getItem("username"))} activeClassName={classes.activeLink}> Reserve </NavLink>
                 </li>
                 <li  className={classes.op}>
-                <NavLink  to="/Manager" activeClassName={classes.activeLink}> Manage </NavLink>
+                <NavLink  to={"/Manager"} onClick={() => changeLocation("/Manager/"+sessionStorage.getItem("username"))} activeClassName={classes.activeLink}> Manage </NavLink>
                 </li>
                 {
                     logged!==null ?

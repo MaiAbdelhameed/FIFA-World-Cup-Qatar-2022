@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style/seating.css";
 import matches from "../matches";
 import Seat from "./Seat";
 
 
 function Seating(props) {
-  const [isLoggedIn, setLoggedIn] = useState(false);
   const [numSelected, setnumSelected] = useState(0);
   const [isSelected, setSelected] = useState(false);
+  const [logged,setLogged]=useState("");
+
+
+  useEffect(() => {
+      setLogged(sessionStorage.getItem("ID"))
+  }); 
 
   const selectSeat = (event) => {
     setSelected((isSelected) => !isSelected);
@@ -33,7 +38,7 @@ function Seating(props) {
   return (
     <div>
       <body className="bigcont">
-        <div class="match-container">
+        <div className="match-container">
           <label>
             {" "}
             Match {props.id}: {props.name}. Date: {props.date}
@@ -41,21 +46,21 @@ function Seating(props) {
         </div>
         <ul class="showcase">
           <li>
-            <div class="seat"></div>
+            <div className="seat"></div>
             <small>Available</small>
           </li>
           <li>
-            <div class={isLoggedIn ? "seat selected" : "disappear"}></div>
-            <small class={isLoggedIn ? "" : "disappear"}>Selected</small>
+            <div className={logged ? "seat selected" : "disappear"}></div>
+            <small className={logged ? "" : "disappear"}>Selected</small>
           </li>
           <li>
-            <div class="seat sold"></div>
+            <div className="seat sold"></div>
             <small>Sold</small>
           </li>
         </ul>
 
-        <div class="container">
-          <div class="screen"></div>
+        <div className="container">
+          <div className="screen"></div>
 
           <div>{drawGrid}</div>
         </div>

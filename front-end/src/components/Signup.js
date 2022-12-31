@@ -2,27 +2,33 @@ import React, { useState } from 'react'
 import classes from './style/auth.module.css'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
-
 import axios from 'axios';
+
 const Signup = (props) => {
     const [errorMsg, setErrorMsg] = useState("");
     
 
     const initialValues = {
         email: '',
-        password: '',
+        pass: '',
         ConfirmPassword: '',
-        username: ''
+        username: '',
+        firstName:'',
+        lastName:'',
+        birthDate:'',
+        nationality:'',
+        gender:'',
+        role:'',
 
     }
 
     const validationSchema = Yup.object().shape({
         email: Yup.string().min(3).trim().email('Invalid email address').required("Email field is required"),
-        password: Yup.string().required("password field is required"),
-        ConfirmPassword: Yup.string().when("password", {
+        pass: Yup.string().required("password field is required"),
+        ConfirmPassword: Yup.string().when("pass", {
             is: val => (val && val.length > 0 ? true : false),
             then: Yup.string().oneOf(
-                [Yup.ref("password")],
+                [Yup.ref("pass")],
                 "Both password need to be the same"
             )
         }),
@@ -30,11 +36,13 @@ const Signup = (props) => {
 
     })
     const onSubmit = (data, { resetForm }) => {
+                    console.log(data)
+
         async function sendRequest() {
             try {
                 data.username=data.username.trim();
                 data.username=data.username.toLowerCase();
-                const request = await axios.post("https://fifa-world-cup.onrender.com/api/user/signup", data);
+                const request = await axios.post("https://http-fifaqatarworldcup-com.onrender.com/auth/sign-up", data);
                 resetForm()
 
             }
@@ -71,12 +79,12 @@ const Signup = (props) => {
                                 <ErrorMessage name='username' component="span" />
                             </div>
                             <div className={classes.fieldContainer}>
-                                <Field className={classes.field} name='fname' placeholder="first name" autoComplete="off" />
+                                <Field className={classes.field} name='firstName' placeholder="first name" autoComplete="off" />
                                 <label className={classes.label}> First name</label>
                                 <ErrorMessage name='username' component="span" />
                             </div>
                             <div className={classes.fieldContainer}>
-                                <Field className={classes.field} name='lname' placeholder="last name" autoComplete="off" />
+                                <Field className={classes.field} name='lastName' placeholder="last name" autoComplete="off" />
                                 <label className={classes.label}>Last Name</label>
                                 <ErrorMessage name='username' component="span" />
                             </div>
@@ -90,7 +98,7 @@ const Signup = (props) => {
                                 Female</label>
                             </div>
                             <div className={classes.fieldContainer}>
-                                <Field className={classes.field} name='bdate' placeholder="birthdate" autoComplete="off" />
+                                <Field className={classes.field} name='birthDate' placeholder="birthdate" autoComplete="off" />
                                 <label className={classes.label}>Birth date</label>
                                 <ErrorMessage name='username' component="span" />
                             </div>
@@ -113,7 +121,7 @@ const Signup = (props) => {
                                 Fan</label>
                             </div>
                             <div className={classes.fieldContainer}>
-                                <Field type="password" className={classes.field} name='password' placeholder="Password" autoComplete="off" />
+                                <Field type="password" className={classes.field} name='pass' placeholder="Password" autoComplete="off" />
                                 <label className={classes.label}> Password</label>
                                 <ErrorMessage name='password' component="span" />
                             </div>

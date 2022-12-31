@@ -98,9 +98,9 @@ body {
   text-align: center;
   font-weight: 600;
   letter-spacing: 0.05rem;
-  width: 7rem;
+  width: 12rem;
   height: 2.5rem;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   border-radius: 10px;
   border-color: #761c38 !important;
   border: solid #761c38;
@@ -109,6 +109,8 @@ body {
   background-position: 0 -100%;
   transition: 1.5s ease;
   color: #761c38;
+  margin-left: 9rem;
+  margin-top: 3rem;
 }
 
 .proceed-btn:hover {

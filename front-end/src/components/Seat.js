@@ -1,10 +1,15 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "./style/seating.css";
 
 
 const Seat = (props) => {
-  const [isLoggedIn, setLoggedIn] = useState(false);
   const [isSelected, setSelected] = useState(false);
+  const [logged,setLogged]=useState("");
+
+
+  useEffect(() => {
+      setLogged(sessionStorage.getItem("ID"))
+  });
 
   const selectSeat = () => {
     setSelected((isSelected) => !isSelected);
@@ -14,7 +19,7 @@ const Seat = (props) => {
     <div>
       {props.val === 0 ? (
         <div
-          class={isSelected && isLoggedIn ? "seat selected" : "seat"}
+          class={isSelected && logged ? "seat selected" : "seat"}
           onClick={selectSeat}
         ></div>
       ) : (

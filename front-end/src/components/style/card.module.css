@@ -23,6 +23,16 @@
     letter-spacing: .12rem;
     margin-left: 2.5em;
 }
+
+.label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1.5rem;
+    color: #761c38 !important;
+  }
+
 .fieldContainer {
     position: relative;
     padding: 15px 0 0;
@@ -56,6 +66,7 @@
     display: block;
 }
 
+
 .field.label{
     font-size: 1.4rem;
     cursor: text;
@@ -66,6 +77,25 @@
 
 .field::placeholder {
     color: transparent;
+}
+
+.field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #c5d6d5, #ffffff);
+    border-image-slice: 1;
+    color: #761c38 !important;
+}
+  
+.field:focus ~ .label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #761c38 !important;
 }
 
 .btn button {

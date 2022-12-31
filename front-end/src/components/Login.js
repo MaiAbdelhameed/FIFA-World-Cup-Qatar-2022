@@ -14,28 +14,38 @@ const Login = (props) => {
     const dispatch = useDispatch();
 
     const initialValues = {
-        emailorusername: '',
-        password: '',
+        username: '',
+        pass: '',
     }
 
     const validationSchema = Yup.object().shape({ 
-        emailorusername: Yup.string().trim().required("username or email can't be empty"),
-        password: Yup.string().trim().required("password field is required")
+        username: Yup.string().trim().required("username or email can't be empty"),
+        pass: Yup.string().trim().required("password field is required")
 
     })
     const onSubmit = (data, { resetForm }) => {
+        // console.log(data)
         async function sendData() {
             try {
-                data.emailorusername=data.emailorusername.trim();
-                data.emailorusername=data.emailorusername.toLowerCase();
-                const request = await axios.post("https://fifa-world-cup.onrender.com/api/user/login", data)
+                
+                const request = await axios.post("https://http-fifaqatarworldcup-com.onrender.com/auth/login", data)
+                console.log(data)
+
                 sessionStorage.setItem("tokenValue", request.data.token)
                 sessionStorage.setItem("ID", request.data.user._id)
                 sessionStorage.setItem("username", request.data.user.username)
+                sessionStorage.setItem("role", request.data.user.role)
+
                 sessionStorage.setItem("Validity", 0)
                 
                 resetForm()
-                navigate("/PredictionGame/"+request.data.user.username);
+                if(sessionStorage.getItem("role") === "fan")
+                    navigate("/Reserve/"+request.data.user.username);
+                else if(sessionStorage.getItem("role") === "manager")
+                    navigate("/Manager/"+request.data.user.username);
+                else
+                    navigate("/Admin");
+
                 window.location.reload(false);
                 dispatch({ type: "Login", login: true, id: request.data._id })
 
@@ -67,12 +77,12 @@ const Login = (props) => {
                         <Form>
 
                             <div className={classes.fieldContainer}>
-                                <Field className={classes.field} name='emailorusername' placeholder="username" autoComplete="off" />
+                                <Field className={classes.field} name='username' placeholder="username" autoComplete="off" />
                                 <label className={classes.label}>Username or email</label>
                                 <ErrorMessage name='username' component="span" />
                             </div>
                             <div className={classes.fieldContainer}>
-                                <Field className={classes.field} name='password' placeholder="Password" autoComplete="off" type="password" />
+                                <Field className={classes.field} name='pass' placeholder="Password" autoComplete="off" type="password" />
                                 <label className={classes.label}> Password</label>
                                 <ErrorMessage name='password' component="span" />
                             </div>

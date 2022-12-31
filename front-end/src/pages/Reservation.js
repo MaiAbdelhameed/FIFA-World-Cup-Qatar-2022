@@ -27,8 +27,13 @@ function createSeating(matches) {
 }
 
 const Reservation = () => {
-  const [isLoggedIn, setLoggedIn] = useState(true);
   const[spinner,setSpinner] = useState(true);
+  const [logged,setLogged]=useState("");
+
+
+  useEffect(() => {
+      setLogged(sessionStorage.getItem("ID"))
+  });
   
     function delay(time) {
         return new Promise(resolve => setTimeout(resolve, time));
@@ -59,11 +64,11 @@ const Reservation = () => {
       {/* TODO: implement conditionally rendered button  */}
       {/* {me?<div className={classes.btn}><button onClick={checkResp}>Submit</button></div>:null} */} 
       
-      <div class={isLoggedIn ? "" : "disappear"}>
+      <div class={logged ? "" : "disappear"}>
         <UpdateInfo />
       </div>
       <div>{matches.map(createSeating)}</div>
-      <div class={isLoggedIn ? "" : "disappear"}>
+      <div class={logged ? "" : "disappear"}>
         <CreditCard />
       </div>
     </div>

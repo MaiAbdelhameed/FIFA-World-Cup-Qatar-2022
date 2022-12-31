@@ -75,7 +75,7 @@
     font-family: inherit;
     width: 100%;
     border: 0;
-    border-bottom: 2px solid #761c38 !important;
+    border-bottom: 2px solid #e38d2a !important;
   
     outline: 0;
     font-size: 1rem;
@@ -154,6 +154,7 @@
   
   .btn {
     margin-top: 2rem;
+    margin-bottom: 2rem;
     width: 100%;
     text-align: center;
   }
@@ -229,8 +230,7 @@
   }
   
   .header2 h1 {
-    color: #761c38 !important;
-  
+    color:  #e38d2a !important;
     font-family: "Poppins", "Noto Sans Regular", "Helvetica Neue", Arial,
       sans-serif;
     font-weight: 500;
