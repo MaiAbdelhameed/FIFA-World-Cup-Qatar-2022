@@ -46,7 +46,7 @@ exports.editUser= async (req, res, next)=>{
 
         updates.forEach((element)=> (user[element] = req.body[element]));
         await user.save();
-        res.send(user)    ;
+        res.send(user);
     }
     catch(e){
         res.status(400);

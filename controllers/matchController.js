@@ -53,13 +53,13 @@ exports.deleteMatch =  (req,res)=>{
 
 exports.editMatch= async (req, res, next)=>{
     try{
-        const match = await Match.findById(req.matchData._id);
-
+        const match = await Match.findById(req.params.id);
+        console.log(match);
         const updates= Object.keys(req.body);
-
+        console.log(updates);
         updates.forEach((element)=> (match[element] = req.body[element]));
         await match.save();
-        res.send(match)    ;
+        res.send(match);
     }
     catch(e){
         res.status(400);
