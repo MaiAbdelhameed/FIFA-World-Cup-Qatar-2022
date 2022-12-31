@@ -31,6 +31,7 @@ exports.deleteUser = async (req,res)=>{
 
     await Users.findByIdAndDelete(id)
     .then((result) =>{
+        console.log(result)
         res.send(result)
     }).catch((err)=>{console.log(err)
         res.status(404).send(err)});

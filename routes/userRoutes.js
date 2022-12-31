@@ -11,11 +11,11 @@ userRouter.get('/single-user/:id',userController.singleUser);
 
 
 /////////////////////////delete requests//////////////////////////
-userRouter.delete('delete/:id', auth.adminAuth, userController.deleteUser);
+userRouter.delete('/delete/:id', auth.adminAuth, userController.deleteUser);
 
 
 /////////////////////////put requests//////////////////////////
-userRouter.put('update/:id', auth.fanAuth,userController.editUser);
+userRouter.put('/update/:id', auth.fanAuth,userController.editUser);
 
 
 module.exports=userRouter;

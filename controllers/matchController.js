@@ -45,7 +45,8 @@ exports.deleteMatch =  (req,res)=>{
 
     Match.findByIdAndDelete(matchid)
     .then(result => {
-        res.json({redirect: '/all-matches'})
+        console.log(result)
+        res.json(result)
     })
     .catch((err)=>console.log(err));
 };
