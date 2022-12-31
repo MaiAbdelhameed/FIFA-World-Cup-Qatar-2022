@@ -5,15 +5,17 @@ import { useState } from 'react'
 
 
 
+
 const MatchList = (props) => {
 
     const drawList = props.list.map((item) => {
         return(
           <div className={classes.container}>
-          <MatchListItem team1={item.team1} 
-           team2={item.team2}
+          <MatchListItem team1={item.firstTeam} 
+           team2={item.secondTeam}
            date={item.date}
-           key={item.id}/> 
+           id = {item._id}
+           key={item._id}/> 
           </div>
         );
       });
