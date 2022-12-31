@@ -7,8 +7,7 @@ exports.allUsers= async (req, res)=> {
         res.send(result)
     })
     .catch((err)=>{
-        console.log(err)
-        res.status(404).send(err);
+        return res.status(400).json({ message: err.message });
     });
 };
 
@@ -20,8 +19,7 @@ exports.singleUser = async (req, res)=> {
         res.send(result)
     })
     .catch((err)=>{
-        console.log(err)
-        res.status(404).send(err);
+        return res.status(400).json({ message: err.message });
     });
 };
 
@@ -33,8 +31,9 @@ exports.deleteUser = async (req,res)=>{
     .then((result) =>{
         console.log(result)
         res.send(result)
-    }).catch((err)=>{console.log(err)
-        res.status(404).send(err)});
+    }).catch((err)=>{
+        return res.status(400).json({ message: err.message });
+    });
 };
 
 

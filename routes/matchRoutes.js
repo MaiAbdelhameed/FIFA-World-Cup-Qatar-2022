@@ -8,15 +8,15 @@ matchRouter.post('/add-match', auth.managerAuth, matchController.addMatch);
 
 
 //////////////////get requests//////////////////////
-matchRouter.get('/all-matches', auth.managerAuth, matchController.allMatches);
+matchRouter.get('/all-matches', matchController.allMatches);
 matchRouter.get('/single-match/:id', matchController.singleMatch);
 
 
-///////////////////delete requests////////////////////////////////
+//////////////////delete requests//////////////////////
 matchRouter.delete('/delete/:id', auth.managerAuth, matchController.deleteMatch);
 
 
-///////////////////put requests////////////////////////////////
+//////////////////put requests//////////////////////
 matchRouter.put('/update/:id', auth.managerAuth, matchController.editMatch);
 
 

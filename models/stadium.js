@@ -1,19 +1,18 @@
-const { Int32 } = require('mongodb');
 const mongoose=require('mongoose');
 
 const schema=mongoose.Schema;
 
 const stadiumSchema = new schema({
     venue:{
-        type: String,
+        type:String,
         required:true
     },
     numRows:{
-        type:Int32,
+        type:Number,
         required:true
     },
     numSeats:{
-        type: Int32,
+        type: Number,
         required:true
     },
     seating:{
@@ -21,7 +20,6 @@ const stadiumSchema = new schema({
         required:true
     }
 },{timestamps: true});
-
-const Stadiums =mongoose.model('stadium', stadiumSchema);
-module.exports=Stadiums;
+const stadium = mongoose.model('stadium', stadiumSchema, 'stadium');
+module.exports=stadium;
 

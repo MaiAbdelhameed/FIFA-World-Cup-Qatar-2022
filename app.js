@@ -11,8 +11,8 @@ app.use(cors());
 const userRouter = require('./routes/userRoutes');
 const authRouter = require('./routes/authRoutes');
 const matchRouter = require('./routes/matchRoutes');
-//const stadiumRouter = require('./routes/stadiumRoutes');
-//const reserveRouter = require('./routes/reserveRoutes');
+const stadiumRouter = require('./routes/stadiumRoutes');
+const reserveRouter = require('./routes/reserveRoutes');
 
 
 app.use(express.json());
@@ -56,8 +56,8 @@ app.use('/matches', matchRouter);
 
 
 /////////////stadiumroutes//////////////
-//app.set('/stadium', stadiumRouter);
+app.use('/stadiums', stadiumRouter);
 
 
 /////////////reservations routes//////////////
-//app.set('/reserve', reservationsRouter);
+app.use('/reserves', reserveRouter);

@@ -21,7 +21,7 @@ exports.allMatches = async (req, res)=> {
         res.send(result)
     })
     .catch((err)=>{
-        console.log(err)
+        return res.status(400).json({ message: err.message });
     });
 };
 
@@ -34,8 +34,7 @@ exports.singleMatch = async (req, res)=> {
         res.send(result);
     })
     .catch((err)=>{
-        console.log(err)
-        res.status(404).send(err);
+        return res.status(400).json({ message: err.message });
     });
 };
 
@@ -48,7 +47,9 @@ exports.deleteMatch =  (req,res)=>{
         console.log(result)
         res.json(result)
     })
-    .catch((err)=>console.log(err));
+    .catch((err)=>{
+        return res.status(400).json({ message: err.message });
+    });
 };
 
 exports.editMatch= async (req, res, next)=>{

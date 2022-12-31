@@ -6,11 +6,6 @@ const jwt = require('jsonwebtoken');
 const schema=mongoose.Schema;
 
 const usersSchema=new schema({
-    // userID: {
-    //     type:Int32,
-    //     required: true,
-    //     unique: true
-    // },
     username:{
         type:String,
         required: true,
@@ -50,21 +45,6 @@ const usersSchema=new schema({
     }
 },{timestamps: true});
 
-
-usersSchema.statics.findByCredentials = async function(username,pass) {
-
-    const user = await Users.findOne({username})
-
-    if(!user) {
-        throw new Error ('No Such User Exists')
-    }
-
-    if(pass!== user.pass) {
-        throw new Error ('Incorrect Password !')
-    } else {
-        return user
-    }
-}
 
 usersSchema.methods.generateAuthToken = async function(){
     const user = this    
