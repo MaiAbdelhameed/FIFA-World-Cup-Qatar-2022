@@ -13,6 +13,8 @@ bcrypt.genSalt(saltRounds)
     console.log('Hash: ', hash);
   }).catch(err => console.error(err.message))
 
+
+
 exports.signup = async (req, res) => {
     try {
         const user = await Users.create({ ...req.body});
@@ -40,15 +42,18 @@ exports.login =  async (req, res) => {
         if (!user) {
             throw new Error("User is not found");
           }
-
-          const ismatch = await bcrypt.compare(req.body.pass, user.pass);
-          if (ismatch) {
-            throw new Error("Password is incorrect");
-          }
-      
-          const token = await user.generateAuthToken();
-      
-          return res.json({ token, user });
+        if (!user.approved)
+        {
+          throw new Error("Your sign-up approval by the admin is pending");
+        }
+        const ismatch = await bcrypt.compare(req.body.pass, user.pass);
+        if (ismatch) {
+          throw new Error("Password is incorrect");
+        }
+    
+        const token = await user.generateAuthToken();
+    
+        return res.json({ token, user });
         }
     }
     catch(err){
@@ -57,3 +62,20 @@ exports.login =  async (req, res) => {
 }
 
 
+
+
+exports.approveUser= async (req, res, next)=>{
+  try{
+      const user = await Users.findById(req.params.id);
+
+      const updates= Object.keys(req.body);
+
+      updates.forEach((element)=> (user[element] = req.body[element]));
+      await user.save();
+      res.send(user);
+  }
+  catch(e){
+      res.status(400);
+      res.send({error: e.toString()});
+  }
+};

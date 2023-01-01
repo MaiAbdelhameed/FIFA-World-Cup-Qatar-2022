@@ -42,6 +42,10 @@ const usersSchema=new schema({
     role: {
         type:String,
         required: true
+    },
+    approved:{
+        type: Boolean,
+        default: 'false'
     }
 },{timestamps: true});
 
