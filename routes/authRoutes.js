@@ -11,5 +11,10 @@ authRouter.post('/login', authController.login);
 ////////////////////////put request////////////////////////
 authRouter.put('/sign-up-approve/:id', auth.adminAuth, authController.approveUser);
 
+
+////////////////////////delete request////////////////////////
+authRouter.delete('/sign-up-disapprove/:id', auth.adminAuth, authController.disapproveUser);
+
+
 module.exports=authRouter;
 

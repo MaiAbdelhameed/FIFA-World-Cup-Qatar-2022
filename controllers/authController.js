@@ -66,15 +66,27 @@ exports.login =  async (req, res) => {
 
 exports.approveUser= async (req, res, next)=>{
   try{
-      const user = await Users.findById(req.params.id);
 
-      //const updates= Object.keys(req.body);
-
-      //updates.forEach((element)=> (user[element] = req.body[element]));
-      user.approved=true;
-      await user.save();
-      res.send(user);
+    const user = await Users.findById(req.params.id);
+    user.approved=true;
+    
+    await user.save();
+    res.send(user);
   }
+  catch(e){
+      res.status(400);
+      res.send({error: e.toString()});
+  }
+};
+
+exports.disapproveUser= async (req, res, next)=>{
+  try{ 
+    await Users.findByIdAndDelete(req.params.id)
+    .then((result) =>{
+        console.log(result)
+        res.send(result)
+  })
+}
   catch(e){
       res.status(400);
       res.send({error: e.toString()});

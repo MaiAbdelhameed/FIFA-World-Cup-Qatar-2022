@@ -25,9 +25,8 @@ exports.singleUser = async (req, res)=> {
 
 
 exports.deleteUser = async (req,res)=>{
-    const id = req.params.id;
 
-    await Users.findByIdAndDelete(id)
+    await Users.findByIdAndDelete(req.params.id)
     .then((result) =>{
         console.log(result)
         res.send(result)
