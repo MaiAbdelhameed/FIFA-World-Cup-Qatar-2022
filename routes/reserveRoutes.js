@@ -8,7 +8,7 @@ reserveRouter.post('/add-reserve/:userID/:matchID', reserveController.addReserve
 
 
 //////////////////get requests//////////////////////
-reserveRouter.get('/all-reserves', reserveController.allReserves);  //for me
+reserveRouter.get('/all-reserves', reserveController.allReserves);  ///////for me
 reserveRouter.get('/single-user-reserve/:userID', reserveController.singleReserve);
 
 

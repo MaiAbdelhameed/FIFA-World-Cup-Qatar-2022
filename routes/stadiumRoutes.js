@@ -9,7 +9,7 @@ stadiumRouter.post('/add-stadium', auth.managerAuth ,stadiumController.addStadiu
 
 //////////////////get requests//////////////////////
 stadiumRouter.get('/all-stadiums', auth.managerAuth, stadiumController.allStadiums);
-stadiumRouter.get('/single-stadium/:id', stadiumController.singleStadium);
+stadiumRouter.get('/single-stadium/:id',auth.managerAuth, stadiumController.singleStadium);
 
 
 ///////////////////delete requests////////////////////////////////

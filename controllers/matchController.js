@@ -3,7 +3,7 @@ const Match = require('../models/matches');
 exports.addMatch= async (req, res)=>{
     try {
         const match = await Match.create({ ...req.body});
-        if (!(match.firstTeam && match.secondTeam && match.venue && match.date && match.time && match.referee && match.firstLinesmen && match.secondLinesmen)) {
+        if (!(match.firstTeam && match.secondTeam && match.venue && match.date && match.time && match.referee && match.firstLinesmen && match.secondLinesmen && match.seating)) {
             res.status(400).send("Please fill all required inputs");
         }
         
