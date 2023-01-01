@@ -68,9 +68,10 @@ exports.approveUser= async (req, res, next)=>{
   try{
       const user = await Users.findById(req.params.id);
 
-      const updates= Object.keys(req.body);
+      //const updates= Object.keys(req.body);
 
-      updates.forEach((element)=> (user[element] = req.body[element]));
+      //updates.forEach((element)=> (user[element] = req.body[element]));
+      user.approved=true;
       await user.save();
       res.send(user);
   }
