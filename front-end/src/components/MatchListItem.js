@@ -17,7 +17,6 @@ const MatchListItem = (props) => {
               };
             let response = '';
             try {
-                console.log(props.id)
 
                 response = await axios.delete("https://http-fifaqatarworldcup-com.onrender.com/matches/delete/" + props.id ,config).then((res) => res.data);
     
@@ -31,7 +30,6 @@ const MatchListItem = (props) => {
               return (response);
     
     })();
-    
     }
 
     return(

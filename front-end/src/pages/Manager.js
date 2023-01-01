@@ -5,7 +5,6 @@ import classes from './style/manager.module.css'
 import MatchCard from '../components/matchCard';
 import StadiumCard from '../components/StadiumCard';
 import MatchList from '../components/MatchList';
-import listData from '../listData'
 
 
 

@@ -38,8 +38,6 @@ const MatchCard = () => {
                 resetForm()
                 window.location.reload(false);
 
-                
-
             } catch (err) {
                 
             }

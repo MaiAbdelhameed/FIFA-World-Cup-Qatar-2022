@@ -15,6 +15,12 @@
     margin-bottom: 10em;
 }
 
+.main2 {
+    position: absolute;
+    top: 25rem;
+    left: 100rem;
+}
+
 .header h1 {
     color:  #e38d2a !important;
     font-family: "Poppins","Noto Sans Regular","Helvetica Neue",Arial,sans-serif;

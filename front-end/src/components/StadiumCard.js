@@ -11,9 +11,9 @@ const StadiumCard = () => {
 
 
     const initialValues = {
-        team1: '',
-        team2: '',
         venue: '',
+        numRows: '',
+        numSeats: '',
         
     }
     
@@ -25,26 +25,27 @@ const StadiumCard = () => {
     const onSubmit = (data, { resetForm }) => {
         async function sendData() {
             try {
-                data.emailorusername=data.emailorusername.trim();
-                data.emailorusername=data.emailorusername.toLowerCase();
-                const request = await axios.post("https://fifa-world-cup.onrender.com/api/user/login", data)
-                sessionStorage.setItem("tokenValue", request.data.token)
-                sessionStorage.setItem("ID", request.data.user._id)
-                sessionStorage.setItem("username", request.data.user.username)
-                sessionStorage.setItem("Validity", 0)
-                
+
+                const request = await axios.post("https://http-fifaqatarworldcup-com.onrender.com/stadiums/add-stadium", data, 
+                { headers: { Authorization: `Bearer ${sessionStorage.getItem("tokenValue")}` } }).then((res) => {
+                    console.log(res)
+                })
+
                 resetForm()
                 window.location.reload(false);
+
+                
+
             } catch (err) {
                 
             }
 
         }
         sendData()
-    }
 
+    }
     return (
-            <div className={classes.main}>
+            <div className={classes.main2}>
                 <div className={classes.header}>
                     <h1>Stadium</h1>
                 </div>
@@ -52,12 +53,17 @@ const StadiumCard = () => {
                         <Form>
 
                             <div className={classes.fieldContainer}>
-                                    <Field className={classes.field} name='shape' placeholder="Shape" autoComplete="off" />
-                                    <label className={classes.label}>Stadium Shape</label>
+                                    <Field className={classes.field} name='venue' placeholder="Venue Name" autoComplete="off" />
+                                    <label className={classes.label}>Venue Name</label>
                             </div>
 
                             <div className={classes.fieldContainer}>
-                                    <Field className={classes.field} name='seats' placeholder="Seats" autoComplete="off" />
+                                    <Field className={classes.field} name='numRows' placeholder="Rows" autoComplete="off" />
+                                    <label className={classes.label}>Number of rows</label>
+                            </div>
+
+                            <div className={classes.fieldContainer}>
+                                    <Field className={classes.field} name='numSeats' placeholder="Seats" autoComplete="off" />
                                     <label className={classes.label}>Number of seats</label>
                             </div>
 

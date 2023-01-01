@@ -8,14 +8,26 @@ import UsersListItem from './UsersListItem'
 const UsersList = (props) => {
 
     const drawList = props.list.map((item) => {
-        return(
-          <div className={classes.container1}>
-          <UsersListItem username={item.username} 
-           email={item.email}
-           key={item.id}/> 
-          </div>
-        );
-      });
+            if(!item.approved){
+                return(          
+                <div className={classes.container1}>
+                    <UsersListItem username={item.username} 
+                    email={item.email}
+                    id={item._id}
+                    exist = {0}
+                    key={item.id}/> 
+                </div>)
+            }else{
+                return(          
+                    <div className={classes.container2}>
+                        <UsersListItem username={item.username} 
+                        email={item.email}
+                        id={item._id}
+                        exist = {1}
+                        key={item.id}/> 
+                    </div>)
+            }
+        })
       
     return(
         <div className={classes.container}>
