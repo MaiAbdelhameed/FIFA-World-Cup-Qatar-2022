@@ -22,6 +22,9 @@ const MatchList = (props) => {
       
     return(
         <div className={classes.container}>
+            <div className={classes.header}>
+            <h1>List of matches</h1>
+            </div>
             {drawList}
         </div>
     )
