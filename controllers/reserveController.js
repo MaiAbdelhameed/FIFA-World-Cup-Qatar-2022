@@ -2,12 +2,28 @@ const Reserve = require('../models/reserve');
 
 exports.addReserve= async (req, res)=>{
     try {
-        const reserve = await Reserve.create({ ...req.body});
-        if (!(reserve.creditCard && reserve.PIN && reserve.numTickets)) {
+        /* const reserve = await Reserve.create({ ...req.body});
+        if (!(reserve.numTickets && reserve.matchID && reserve.userID)) {
             res.status(400).send("Please fill all required inputs");
+        } */
+        const userID=req.params.userID;
+        const matchID=req.params.matchID;
+        const numTickets=req.body.numTickets;
+        if (!numTickets)
+        {
+            res.status(400).send("Please enter the number of tickets.");
         }
-        
-        return res.json(reserve);
+        const reserve= new Reserve({
+            numTickets,
+            matchID,
+            userID
+        });
+
+        reserve.save()
+        .then((result)=>{
+            console.log(result)
+            res.send(result)
+        })
     }
     catch (err) {
         return res.status(400).json({ message: err.message });
@@ -27,7 +43,10 @@ exports.allReserves = async (req, res)=> {
 
 
 exports.singleReserve = async (req, res)=> {
-    await Reserve.findById(req.params.id)
+    const userID=req.params.userID;
+    await Reserve.find({
+        "userID":userID
+    })
     .then((result)=>{
         console.log(result);
         res.send(result);
@@ -39,14 +58,20 @@ exports.singleReserve = async (req, res)=> {
 };
 
 
-exports.deleteReserve=  (req,res)=>{
+exports.deleteReserve=  async (req,res)=>{
+    const userID=req.params.userID;
+    const matchID=req.params.matchID;
 
-    Reserve.findByIdAndDelete(req.params.id)
+    await Reserve.findOneAndDelete({
+        "matchID": matchID,
+        "userID":userID
+    })
     .then(result => {
         res.json(result)
     })
     .catch((err)=>console.log(err));
 };
+
 
 exports.editReserve= async (req, res, next)=>{
     try{

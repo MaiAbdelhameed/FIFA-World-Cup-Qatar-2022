@@ -4,20 +4,17 @@ const reserveController=require('../controllers/reserveController');
 const auth = require('../middleware/authJwt');
 
 //////////////////post requests//////////////////////
-reserveRouter.post('/add-reserve', reserveController.addReserve);
+reserveRouter.post('/add-reserve/:userID/:matchID', reserveController.addReserve);
 
 
 //////////////////get requests//////////////////////
-reserveRouter.get('/all-reserves', auth.managerAuth, reserveController.allReserves);
-reserveRouter.get('/single-reserve/:id', reserveController.singleReserve);
+reserveRouter.get('/all-reserves', reserveController.allReserves);  //for me
+reserveRouter.get('/single-user-reserve/:userID', reserveController.singleReserve);
 
 
 //////////////////delete requests//////////////////////
-reserveRouter.delete('/delete/:id', reserveController.deleteReserve);
+reserveRouter.delete('/delete/:userID/:matchID', reserveController.deleteReserve);
 
-
-//////////////////put requests//////////////////////
-reserveRouter.put('/update/:id', reserveController.editReserve);
 
 
 module.exports=reserveRouter;

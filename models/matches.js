@@ -36,6 +36,10 @@ const matchSchema= new schema({
     secondLinesmen:{
         type:String,
         required: true
+    },
+    seating:{
+        type:Array,
+        required:true
     }
 }, {timestamps: true});
 

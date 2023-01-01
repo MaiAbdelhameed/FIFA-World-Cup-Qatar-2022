@@ -4,7 +4,7 @@ const Stadium = require('../models/stadium.js');
 exports.addStadium= async (req, res)=>{
     try {
         const stadium = await Stadium.create({ ...req.body});
-        if (!(stadium.venue && stadium.numRows && stadium.numSeats && stadium.seating)) {
+        if (!(stadium.venue && stadium.numRows && stadium.numSeats)) {
             res.status(400).send("Please fill all required inputs");
         }
         

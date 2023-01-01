@@ -4,21 +4,19 @@ const mongoose=require('mongoose');
 const schema=mongoose.Schema;
 
 const reserveSchema = new schema({
-    creditCard: {
-        type:Number,
-        required:true
-    },
-    PIN: {
-        type:Number,
-        required:true
-    },
     numTickets:{
         type:Number, 
         required:true
+    },
+    matchID:{
+         type:String, 
+         required:true
+    },
+    userID:{
+        type:String,
+        requred:true
     }
-    // matchID:{
-    //     type:Number
-    // }
+
 },{timestamps: true});
 
 const reservations =mongoose.model('reservations', reserveSchema);

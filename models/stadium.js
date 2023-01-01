@@ -14,10 +14,6 @@ const stadiumSchema = new schema({
     numSeats:{
         type: Number,
         required:true
-    },
-    seating:{
-        type:Array,
-        required:true
     }
 },{timestamps: true});
 const stadium = mongoose.model('stadium', stadiumSchema, 'stadium');
