@@ -14,18 +14,14 @@ const StadiumCard = () => {
         venue: '',
         numRows: '',
         numSeats: '',
-        
     }
     
-    const validationSchema = Yup.object().shape({ 
-        emailorusername: Yup.string().trim().required("username or email can't be empty"),
-        password: Yup.string().trim().required("password field is required")
 
-    })
     const onSubmit = (data, { resetForm }) => {
         async function sendData() {
             try {
 
+                console.log("requesting")
                 const request = await axios.post("https://http-fifaqatarworldcup-com.onrender.com/stadiums/add-stadium", data, 
                 { headers: { Authorization: `Bearer ${sessionStorage.getItem("tokenValue")}` } }).then((res) => {
                     console.log(res)
@@ -49,7 +45,7 @@ const StadiumCard = () => {
                 <div className={classes.header}>
                     <h1>Stadium</h1>
                 </div>
-                    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                    <Formik initialValues={initialValues}  onSubmit={onSubmit}>
                         <Form>
 
                             <div className={classes.fieldContainer}>
@@ -66,7 +62,6 @@ const StadiumCard = () => {
                                     <Field className={classes.field} name='numSeats' placeholder="Seats" autoComplete="off" />
                                     <label className={classes.label}>Number of seats</label>
                             </div>
-
 
                             <div className={classes.errorMsg}>{}</div>
                             <div className={classes.btn}>

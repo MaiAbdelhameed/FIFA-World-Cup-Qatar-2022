@@ -1,3 +1,126 @@
-.container{
+.container {
     margin-top: 4rem;
-}
+    margin-left: 6.5rem;
+  }
+  
+  .header h1 {
+    color: #e38d2a !important;
+    font-family: "Poppins", "Noto Sans Regular", "Helvetica Neue", Arial,
+      sans-serif;
+    font-weight: 600;
+    font-size: 3rem;
+    letter-spacing: 0.12rem;
+    margin-left: 8em;
+  }
+  
+  .title {
+    margin-left: 2.5em;
+    font-size: 2rem;
+    color: #761c38 !important;
+  }
+  
+  .date {
+    margin-left: 8rem;
+    font-size: 1.5rem;
+    color: #e38d2a;
+  }
+  
+  .btn button {
+    font-family: "Poppins", "Noto Sans Regular", "Helvetica Neue", Arial,
+      sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    width: 10rem;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    border-radius: 10px;
+    border-color: #761c38 !important;
+    border: solid #761c38;
+    background: transparent;
+    transition: 1.5s ease;
+    color: #761c38;
+    margin-top: 1em;
+    margin-left: 9em;
+  }
+  
+  .btn button:hover {
+    background-color: #660221;
+    box-shadow: 0 0.3rem 1.3rem #b11534;
+    color: #ffffff;
+    transition: background-color 0.4s;
+  }
+  
+  .container1 {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    border-color: rgb(255, 255, 255);
+  }
+  
+  .center {
+    margin-top: 5em;
+    margin-left: 50em;
+  }
+  
+
+  
+  .label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1.5rem;
+    color: #761c38 !important;
+  }
+  
+  .field:focus {
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image: linear-gradient(to right, #c5d6d5, #ffffff);
+    border-image-slice: 1;
+    color: #761c38 !important;
+  }
+  
+  .field:focus ~ .label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #761c38 !important;
+  }
+  
+  .field:required,
+  .field:invalid {
+    box-shadow: none;
+  }
+  
+  .fieldContainer span {
+    color: red;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .box2 p {
+    font-size: 1.7rem;
+    text-align: center;
+    color: #761c38 !important;
+  }
+  
+  .box2 span {
+    cursor: pointer;
+    color: #761c38 !important;
+    font-weight: 800;
+    font-size: 15px;
+    font-family: "Poppins", "Noto Sans Regular", "Helvetica Neue", Arial,
+      sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+  }
+  
+ 

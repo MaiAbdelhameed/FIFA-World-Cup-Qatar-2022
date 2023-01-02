@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./style/seating.css";
-import matches from "../matches";
 import Seat from "./Seat";
 
 
 function Seating(props) {
   const [numSelected, setnumSelected] = useState(0);
   const [isSelected, setSelected] = useState(false);
+  const [arrSeats, setSeats] = useState(props.seats);
   const [logged,setLogged]=useState("");
+
+  let rows = 4;
 
 
   useEffect(() => {
@@ -25,15 +27,17 @@ function Seating(props) {
     }
   };
 
-  const drawGrid = props.area.map((row) => {
+  const drawGrid = props.seats.map((row, index) => {
     return (
       <div className="row">
-        {row.map((i) => (
-          <Seat val={i} />
-        ))}
+        {/* {row.map((i) => (
+        ))} */}
+        <Seat val={row} seats={props.seats} i={index} />
+
       </div>
     );
   });
+
 
   return (
     <div>
@@ -41,7 +45,7 @@ function Seating(props) {
         <div className="match-container">
           <label>
             {" "}
-            Match {props.id}: {props.name}. Date: {props.date}
+           {props.team1} vs {props.team2} . Date: {props.date}
           </label>
         </div>
         <ul class="showcase">
@@ -59,10 +63,10 @@ function Seating(props) {
           </li>
         </ul>
 
-        <div className="container">
+        <div className="container" style={{maxWidth:(90*rows)}}>
           <div className="screen"></div>
 
-          <div>{drawGrid}</div>
+          <div className="stadium"  >{drawGrid}</div>
         </div>
       </body>
     </div>

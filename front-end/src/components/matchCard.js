@@ -8,6 +8,8 @@ import * as Yup from 'yup'
 
 
 const MatchCard = () => {
+  const [stadiumData,setStadiumData ] = React.useState([]);
+
 
 
     const initialValues = {
@@ -19,17 +21,48 @@ const MatchCard = () => {
         referee:'',
         firstLinesmen:'',
         secondLinesmen:'',
+        seating: [],
         
     }
+
+    function dropDownMenu(option,index) {
+        return (
+            <option  key={index}className={classes.option} value={index} >{option}</option>
+        )
+    }
     
-    const validationSchema = Yup.object().shape({ 
+
+    async function getSData() {    
+        var config = {
+          method: 'get',
+          headers: {Authorization:"Bearer "+ sessionStorage.getItem("tokenValue") }
+        };
+        let response = '';
+        try {
+    
+          response = await axios.get("https://http-fifaqatarworldcup-com.onrender.com/stadiums/all-stadiums",config).then((res) => res.data);
+          return (response);
+        } catch (error) {
+          if (error.response) {
+            return (error.response);
+          }
+        }
+        return (response);
+      }
+    
+      React.useEffect(() => {
+        (async () => {
+          const resp = await getSData();
+          setStadiumData(resp);
+        })();
+      }, []);
 
 
-    })
+
     const onSubmit = (data, { resetForm }) => {
         async function sendData() {
             try {
-
+                data.seating = Array.from({length: Number(stadiumData[Number(data.venue)].numSeats)}, (v, i) => 0);
                 const request = await axios.post("https://http-fifaqatarworldcup-com.onrender.com/matches/add-match", data, 
                 { headers: { Authorization: `Bearer ${sessionStorage.getItem("tokenValue")}` } }).then((res) => {
                     console.log(res)
@@ -41,10 +74,8 @@ const MatchCard = () => {
             } catch (err) {
                 
             }
-
         }
         sendData()
-
     }
 
     return (
@@ -52,7 +83,7 @@ const MatchCard = () => {
                 <div className={classes.header}>
                     <h1>Match</h1>
                 </div>
-                    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                    <Formik initialValues={initialValues} onSubmit={onSubmit}>
                         <Form>
                             <div className={classes.Teams}>
                                 <div className={classes.fieldContainer}>
@@ -66,8 +97,11 @@ const MatchCard = () => {
                             </div>
 
                             <div className={classes.fieldContainer}>
-                                <Field className={classes.field} name='venue' placeholder="Match Venue" autoComplete="off" />
-                                <label className={classes.label}>Match Venue</label>
+                                <label className={classes.label}>venue</label>
+                                <Field as="select" className={classes.input} type="text" name="venue" placeholder="Type here">
+                                <option value="" disabled="disabled">Select the venue</option>
+                                {stadiumData? stadiumData.map((g, index)=> dropDownMenu(g.venue,index)) : null}
+                                </Field>
                             </div>
 
                             <div className={classes.fieldContainer}>
@@ -92,7 +126,7 @@ const MatchCard = () => {
                                 </div>
                                 <div className={classes.fieldContainer}>
                                     <Field className={classes.field} name='secondLinesmen' placeholder="linesman2" autoComplete="off" />
-                                    <label className={classes.label}>First Lineman</label>
+                                    <label className={classes.label}>Second Lineman</label>
                                 </div>
                             </div>
 

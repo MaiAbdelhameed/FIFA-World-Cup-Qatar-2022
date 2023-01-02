@@ -38,9 +38,9 @@
 
 .seat {
   background-color: #fff;
-  height: 26px;
-  width: 32px;
-  margin: 3px;
+  height: 25px;
+  width: 30px;
+  margin: 2.5px;
   font-size: 50px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -93,6 +93,15 @@
   width: 100%;
   margin: 15px 0;
   transform: rotateX(-48deg);
+}
+
+.stadium{
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
 }
 
 p.text {

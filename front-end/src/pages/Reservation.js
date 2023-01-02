@@ -4,36 +4,64 @@ import classes from './style/predictionpage.module.css'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import Seating from '../components/Seating';
-import matches from '../matches';
 import CreditCard from "../components/CreditCard";
 import UpdateInfo from "../components/UpdateInfo";
 
 
 import Loader from '../components/Loader';
 
-function createSeating(matches) {
-  return (
-    <Seating
-      key={matches.id}
-      id={matches.id}
-      name={matches.name}
-      rows={matches.rows}
-      seats={matches.seats}
-      date={matches.date}
-      area={matches.area}
-      row1={matches.row1}
-    />
-  );
-}
-
 const Reservation = () => {
   const[spinner,setSpinner] = useState(true);
   const [logged,setLogged]=useState("");
+  const [matchData,setMatchData ] = React.useState([]);
+
 
 
   useEffect(() => {
       setLogged(sessionStorage.getItem("ID"))
   });
+
+
+  const createSeating = matchData.map((matches) => {
+    return(
+      <Seating
+      key={matches.id}
+      id={matches.id}
+      team1={matches.firstTeam}
+      team2={matches.secondTeam}
+      date={matches.date}
+      seats={matches.seating}
+      venue={matches.venue}
+    />
+    );
+  });
+
+  async function getData() {
+    console.log("requesting")
+
+    var config = {
+      method: 'get',
+      headers: {Authorization:"Bearer "+ sessionStorage.getItem("tokenValue") }
+    };
+    let response = '';
+    try {
+
+      response = await axios.get("https://http-fifaqatarworldcup-com.onrender.com/matches/all-matches",config).then((res) => res.data);
+      return (response);
+    } catch (error) {
+      if (error.response) {
+        return (error.response);
+      }
+    }
+    return (response);
+  }
+
+  React.useEffect(() => {
+    (async () => {
+      const resp = await getData();
+      setMatchData(resp);
+    })();
+  }, []);
   
     function delay(time) {
         return new Promise(resolve => setTimeout(resolve, time));
@@ -56,7 +84,7 @@ const Reservation = () => {
   return (
     <>
       {spinner?<Loader />:
-    <div className={classes.body}>
+      <div className={classes.body}>
       
       <h2 className={classes.title}> Reservations Here</h2>
 
@@ -67,7 +95,7 @@ const Reservation = () => {
       <div class={logged ? "" : "disappear"}>
         <UpdateInfo />
       </div>
-      <div>{matches.map(createSeating)}</div>
+      <div>{createSeating}</div>
       <div class={logged ? "" : "disappear"}>
         <CreditCard />
       </div>

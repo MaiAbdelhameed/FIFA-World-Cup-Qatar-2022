@@ -13,6 +13,7 @@ const Seat = (props) => {
 
   const selectSeat = () => {
     setSelected((isSelected) => !isSelected);
+    console.log(props.i)
   };
 
   return (
