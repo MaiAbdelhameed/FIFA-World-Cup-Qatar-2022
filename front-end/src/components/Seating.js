@@ -4,12 +4,15 @@ import Seat from "./Seat";
 
 
 function Seating(props) {
+  console.log(props.stadiums)
   const [numSelected, setnumSelected] = useState(0);
   const [isSelected, setSelected] = useState(false);
+  const [rows, setRows] = useState(Number(props.stadiums[Number(props.venue)].numRows));
+  console.log(rows)
   const [initialSeats, setInitial] = useState(props.seats);
   const [logged,setLogged]=useState("");
 
-  let rows = 5;
+  // let rows = 5;
 
   function formatDate(date)
   {

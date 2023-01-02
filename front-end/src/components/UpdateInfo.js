@@ -135,7 +135,7 @@ const style = {
           <div className={classes.container}>
             <div className={classes.center}>
               <Box className={classes.box1} sx={style}>
-                <Formik initialValues={initialValues}enableReinitialize validationSchema={validationSchema} onSubmit={onSubmit}>
+                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
                   <Form>
                     <div className={classes.fieldContainer}>
                       <Field

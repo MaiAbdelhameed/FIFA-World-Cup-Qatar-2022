@@ -15,6 +15,7 @@ const Reservation = () => {
   const[spinner,setSpinner] = useState(true);
   const [logged,setLogged]=useState("");
   const [matchData,setMatchData ] = React.useState([]);
+  const [stadiumData,setStadiumData ] = React.useState([]);
   const [initialArr, setInitial] = useState([]);
 
 
@@ -36,6 +37,7 @@ const Reservation = () => {
       time={matches.time}
       seats={matches.seating}
       venue={matches.venue}
+      stadiums={stadiumData}
     />
     );
   });
@@ -59,14 +61,35 @@ const Reservation = () => {
     }
     return (response);
   }
+  async function getSData() {    
+    var config = {
+      method: 'get',
+      headers: {Authorization:"Bearer "+ sessionStorage.getItem("tokenValue") }
+    };
+    let response = '';
+    try {
+
+      response = await axios.get("https://http-fifaqatarworldcup-com.onrender.com/stadiums/all-stadiums",config).then((res) => res.data);
+      return (response);
+    } catch (error) {
+      if (error.response) {
+        return (error.response);
+      }
+    }
+    return (response);
+  }
 
   React.useEffect(() => {
     (async () => {
       const resp = await getData();
+      const resp1 = await getSData();
       setMatchData(resp);
+      setStadiumData(resp1);
 
     })();
   }, []);
+
+
   
     function delay(time) {
         return new Promise(resolve => setTimeout(resolve, time));
