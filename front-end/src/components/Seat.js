@@ -13,6 +13,7 @@ const Seat = (props) => {
 
   const selectSeat = () => {
     setSelected((isSelected) => !isSelected);
+    props.seats[props.i] = 2;
     console.log(props.i)
   };
 

@@ -9,11 +9,14 @@ import UpdateInfo from "../components/UpdateInfo";
 
 
 import Loader from '../components/Loader';
+import { initial } from 'lodash';
 
 const Reservation = () => {
   const[spinner,setSpinner] = useState(true);
   const [logged,setLogged]=useState("");
   const [matchData,setMatchData ] = React.useState([]);
+  const [initialArr, setInitial] = useState([]);
+
 
 
 
@@ -60,6 +63,7 @@ const Reservation = () => {
     (async () => {
       const resp = await getData();
       setMatchData(resp);
+
     })();
   }, []);
   

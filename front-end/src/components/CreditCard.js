@@ -18,6 +18,7 @@ const style = {
 
 const CreditCard = () => {
   const [num, setNum] = useState(0);
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(true);

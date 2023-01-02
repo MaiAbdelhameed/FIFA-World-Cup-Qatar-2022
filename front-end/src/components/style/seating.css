@@ -115,3 +115,33 @@ p.text span {
 .disappear {
   display: none;
 }
+
+
+.btn {
+  margin-left: 12.2rem;
+  margin-top: 2rem;
+  text-align: center;
+  font-family: "Poppins", "Noto Sans Regular", "Helvetica Neue", Arial,
+    sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  width: 10rem;
+  padding: .5rem 0;
+  font-size: 1rem;
+  border-radius: 10px;
+  border-color: #ffffff !important;
+  border: solid #761c38;
+  background: transparent;
+  background-image: url("../../img/button.png");
+  background-repeat: repeat-x;
+  background-position: 0 -100%;
+  transition: 1.5s ease;
+  color: #ffffff;
+}
+
+.btn button:hover {
+  background-color: #660221;
+  box-shadow: 0 0.3rem 1.3rem #b11534;
+  color: #ffffff;
+  transition: background-color 0.4s;
+}

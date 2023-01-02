@@ -1,11 +1,12 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import classes from "./style/updateinfo.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup'
 import axios from 'axios';
+import { concat } from "lodash";
 
 
 const style = {
@@ -110,14 +111,17 @@ const style = {
       (async () => {
         const resp = await GetUserProfile();
         setProfileInfo(resp);
-        console.log(resp)
 
             // console.log(ProfileInfo)
       })();
-    
+
 
     setOpen(true);
   }
+  useEffect(() => {
+    // console.log(ProfileInfo);
+    console.log(initialValues);
+ }, [ProfileInfo]);
  
 
     return (
@@ -131,7 +135,7 @@ const style = {
           <div className={classes.container}>
             <div className={classes.center}>
               <Box className={classes.box1} sx={style}>
-                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                <Formik initialValues={initialValues} enableReinitialize validationSchema={validationSchema} onSubmit={onSubmit}>
                   <Form>
                     <div className={classes.fieldContainer}>
                       <Field

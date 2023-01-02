@@ -6,11 +6,28 @@ import Seat from "./Seat";
 function Seating(props) {
   const [numSelected, setnumSelected] = useState(0);
   const [isSelected, setSelected] = useState(false);
-  const [arrSeats, setSeats] = useState(props.seats);
+  const [initialSeats, setInitial] = useState(props.seats);
   const [logged,setLogged]=useState("");
 
   let rows = 4;
 
+  const bookticket =()=>{
+    //For preparing the tickets to the backend
+    // for(let i=0; i<props.seats.length; i++)
+    // {
+    //     if(props.seats[i] == 2)
+    //     props.seats[i]=1;
+    // }
+    //Send the array of numbers to the backend 
+    let diff =0;
+
+    for(let i=0; i<props.seats.length; i++){
+      if(initialSeats[i] != props.seats[i]){
+        diff++; 
+      }
+    }
+    console.log(diff)
+  }
 
   useEffect(() => {
       setLogged(sessionStorage.getItem("ID"))
@@ -30,10 +47,7 @@ function Seating(props) {
   const drawGrid = props.seats.map((row, index) => {
     return (
       <div className="row">
-        {/* {row.map((i) => (
-        ))} */}
         <Seat val={row} seats={props.seats} i={index} />
-
       </div>
     );
   });
@@ -67,6 +81,7 @@ function Seating(props) {
           <div className="screen"></div>
 
           <div className="stadium"  >{drawGrid}</div>
+          <button  className="btn" onClick={bookticket}>Reserve</button>
         </div>
       </body>
     </div>
