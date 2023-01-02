@@ -9,8 +9,13 @@ function Seating(props) {
   const [initialSeats, setInitial] = useState(props.seats);
   const [logged,setLogged]=useState("");
 
-  let rows = 4;
+  let rows = 5;
 
+  function formatDate(date)
+  {
+    return(date?date.slice(0,10):null)
+  }
+  
   const bookticket =()=>{
     //For preparing the tickets to the backend
     // for(let i=0; i<props.seats.length; i++)
@@ -57,9 +62,9 @@ function Seating(props) {
     <div>
       <body className="bigcont">
         <div className="match-container">
-          <label>
+          <label className="title">
             {" "}
-           {props.team1} vs {props.team2} . Date: {props.date}
+           {props.team1} vs {props.team2} . Date: {formatDate(props.date)} at {props.time}
           </label>
         </div>
         <ul class="showcase">

@@ -1,6 +1,7 @@
 .container {
     margin-top: 4rem;
-    margin-left: 6.5rem;
+    margin-left: 50rem;
+    display: flex;
   }
   
   .header h1 {
@@ -123,7 +124,7 @@
     letter-spacing: 0.05rem;
   }
   
-  .container {
+  /* .container {
     min-height: 100vh;
     background-size: cover;
     background-position: center;
@@ -132,7 +133,7 @@
     background-attachment: fixed;
     border-color: white;
     justify-content: center;
-  }
+  } */
   
   .main {
     margin-left: 20em;

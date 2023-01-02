@@ -28,11 +28,16 @@ const MatchListItem = (props) => {
   const [open, setOpen] = React.useState(false);
   const [matchInfo, setMatchInfo] = React.useState([]);
   
+  function formatDate(date)
+  {
+    return(date?date.slice(0,10):null)
+  }
+
   const initialValues = {
     firstTeam: matchInfo.firstTeam,
     secondTeam: matchInfo.secondTeam,
     venue: matchInfo.venue,
-    date: matchInfo.date,
+    date:  formatDate(matchInfo.date),
     time:matchInfo.time,
     referee: matchInfo.referee,
     firstLinesmen: matchInfo.firstLinesmen,
@@ -129,8 +134,10 @@ const MatchListItem = (props) => {
 
     return(
         <div className={classes.container}>
+          <div className='sub1'>
             <h2 className={classes.title}>{props.team1} vs {props.team2}</h2>
-            <h3 className={classes.date}>{props.date}</h3>
+            <h3 className={classes.date}>{ formatDate(props.date)}</h3>
+          </div>
             <div className={classes.btn}>
               <button onClick={handleOpen}>update</button>
             </div>

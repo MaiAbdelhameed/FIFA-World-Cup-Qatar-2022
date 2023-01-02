@@ -33,6 +33,7 @@ const Reservation = () => {
       team1={matches.firstTeam}
       team2={matches.secondTeam}
       date={matches.date}
+      time={matches.time}
       seats={matches.seating}
       venue={matches.venue}
     />

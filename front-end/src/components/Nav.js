@@ -39,16 +39,7 @@ const Nav = () => {
 
             <div className={classes.navOptions}>
             <div className={` ${classes.options}`}>
-            <ul className={classes.links}>
-                <li  className={classes.op}>
-                <NavLink to="/" exact activeClassName={classes.activeLink}>  HOME  </NavLink>
-                </li>
-                <li   className={classes.op}>
-                <NavLink to={"/Reserve/"} onClick={() => changeLocation("/Reserve/"+sessionStorage.getItem("username"))} activeClassName={classes.activeLink}> Reserve </NavLink>
-                </li>
-                <li  className={classes.op}>
-                <NavLink  to={"/Manager"} onClick={() => changeLocation("/Manager/"+sessionStorage.getItem("username"))} activeClassName={classes.activeLink}> Manage </NavLink>
-                </li>
+            <ul className={classes.links}>  
                 {
                     logged!==null ?
                     <li   className={classes.login}>

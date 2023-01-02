@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './style/listItem.module.css'
+import classes from './style/list.module.css'
 import  MatchListItem from './MatchListItem'
 import { useState } from 'react'
 
@@ -22,7 +22,10 @@ const MatchList = (props) => {
       
     return(
         <div className={classes.container}>
-            {drawList}
+        <h1> Matches List</h1>
+          <div>
+          {drawList}
+          </div>
         </div>
     )
 }
