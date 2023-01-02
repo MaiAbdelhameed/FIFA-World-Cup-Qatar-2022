@@ -8,8 +8,8 @@ stadiumRouter.post('/add-stadium', auth.managerAuth ,stadiumController.addStadiu
 
 
 //////////////////get requests//////////////////////
-stadiumRouter.get('/all-stadiums', auth.managerAuth, stadiumController.allStadiums);
-stadiumRouter.get('/single-stadium/:id',auth.managerAuth, stadiumController.singleStadium);
+stadiumRouter.get('/all-stadiums', stadiumController.allStadiums);
+stadiumRouter.get('/single-stadium/:id', stadiumController.singleStadium);
 
 
 ///////////////////delete requests////////////////////////////////
